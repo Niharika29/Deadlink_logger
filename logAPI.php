@@ -16,4 +16,8 @@ $query = "INSERT INTO bot_log VALUES (" . $wiki . $pageId . $revId . $numLinks .
 
 $result = mysqli_query( $link, $query );
 
-?>
+if ( $result ) {
+	return json_encode( 'true' );
+} else {
+	return json_encode( 'false' );
+}
