@@ -12,7 +12,7 @@ $status = $_GET['status'] ? $_GET['status'] : '';
 
 $link = mysqli_connect( 'host', 'user', 'password', 'deadlinks' );
 
-$query = "INSERT INTO bot_log VALUES (" . $wiki . $pageId . $revId . $numLinks . $botId . $service . $status ")";
+$query = "INSERT INTO bot_log VALUES (" . $wiki . $pageId . $revId . $numLinks . $botId . $service . $status . ")";
 
 $result = mysqli_query( $link, $query );
 
