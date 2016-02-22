@@ -1,9 +1,11 @@
 CREATE TABLE IF NOT EXISTS bot_log (
-	wiki		VARCHAR(30) DEFAULT NULL,
+	wiki		VARCHAR(30) DEFAULT NULL, // URL of the wiki
 	page_id		INT(11) UNSIGNED DEFAULT NULL,
 	rev_id		INT(11) UNSIGNED DEFAULT NULL,
 	num_links	INT(11) UNSIGNED DEFAULT NULL,
 	bot_id		INT(11) UNSIGNED NOT NULL,
 	service		VARCHAR(30) DEFAULT NULL,
-	status		ENUM('fixed', 'posted') DEFAULT NULL
+	status		ENUM('fixed', 'posted') DEFAULT NULL,
+	page_name	VARCHAR(255) DEFAULT NULL,
+	datetime	NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
