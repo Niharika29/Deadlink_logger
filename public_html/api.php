@@ -3,15 +3,13 @@
 require_once dirname(__FILE__) . '/../config.php';
 
 function addLogRecord( $vars ) {
-		var_dump( $vars );
-
-	$wiki = isset( $vars['wiki']) ? $vars['wiki'] : '';
-	$pageId = isset($vars['page']) ? $vars['page'] : '';
-	$revId = isset($vars['rev']) ? $vars['rev'] : '';
-	$numLinks = isset($vars['num']) ? $vars['num'] : '';
-	$botId = isset($vars['id']) ? $vars['id'] : '';
-	$service = isset($vars['service']) ? $vars['service'] : '';
-	$status = isset($vars['status']) ? $vars['status'] : '';
+	$wiki = isset( $vars['wiki'] ) ? $vars['wiki'] : '';
+	$pageId = isset( $vars['page'] ) ? $vars['page'] : '';
+	$revId = isset( $vars['rev'] ) ? $vars['rev'] : '';
+	$numLinks = isset( $vars['num'] ) ? $vars['num'] : '';
+	$botId = isset( $vars['id'] ) ? $vars['id'] : '';
+	$service = isset( $vars['service'] ) ? $vars['service'] : '';
+	$status = isset( $vars['status'] ) ? $vars['status'] : '';
 
 	$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
@@ -26,7 +24,7 @@ function addLogRecord( $vars ) {
 		return json_encode( 'false' );
 	}
 
-	echo $result;
+var_dump( $result );
 }
 
 // $wiki = isset($_GET['wiki']) ? $_GET['wiki'] : '';
