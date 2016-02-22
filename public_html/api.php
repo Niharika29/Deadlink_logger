@@ -11,9 +11,7 @@ function addLogRecord( $vars, $link ) {
 	$service = isset( $vars['service'] ) ? $vars['service'] : '';
 	$status = isset( $vars['status'] ) ? $vars['status'] : '';
 
-	// $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
-
-	$query = "INSERT INTO bot_log (wiki, page_id, rev_id, num_links, bot_id, service, status)
+	$query = "INSERT INTO bot_log ( wiki, page_id, rev_id, num_links, bot_id, service, status )
 	          VALUES ( '$wiki' , '$pageId' , '$revId' , '$numLinks' , '$botId' , '$service' , '$status' )";
 
 	$result = mysqli_query( $link, $query );
@@ -25,13 +23,4 @@ function addLogRecord( $vars, $link ) {
 		return json_encode( 'false' );
 	}
 
-var_dump( $query );
 }
-
-// $wiki = isset($_GET['wiki']) ? $_GET['wiki'] : '';
-// $pageId = isset($_GET['page']) ? $_GET['page'] : '';
-// $revId = isset($_GET['rev']) ? $_GET['rev'] : '';
-// $numLinks = isset($_GET['num']) ? $_GET['num'] : '';
-// $botId = isset($_GET['id']) ? $_GET['id'] : '';
-// $service = isset($_GET['service']) ? $_GET['service'] : '';
-// $status = isset($_GET['status']) ? $_GET['status'] : '';
