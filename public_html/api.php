@@ -2,7 +2,7 @@
 
 require_once dirname(__FILE__) . '/../config.php';
 
-function addLogRecord( $vars ) {
+function addLogRecord( $vars, $link ) {
 	$wiki = isset( $vars['wiki'] ) ? $vars['wiki'] : '';
 	$pageId = isset( $vars['page'] ) ? $vars['page'] : '';
 	$revId = isset( $vars['rev'] ) ? $vars['rev'] : '';
@@ -11,7 +11,7 @@ function addLogRecord( $vars ) {
 	$service = isset( $vars['service'] ) ? $vars['service'] : '';
 	$status = isset( $vars['status'] ) ? $vars['status'] : '';
 
-	$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
+	// $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
 	$query = "INSERT INTO bot_log (wiki, page_id, rev_id, num_links, bot_id, service, status)
 	          VALUES ( '$wiki' , '$pageId' , '$revId' , '$numLinks' , '$botId' , '$service' , '$status' )";
@@ -19,12 +19,13 @@ function addLogRecord( $vars ) {
 	$result = mysqli_query( $link, $query );
 
 	if ( $result ) {
+		echo "Woot!";
 		return json_encode( 'true' );
 	} else {
 		return json_encode( 'false' );
 	}
 
-var_dump( $result );
+var_dump( $query );
 }
 
 // $wiki = isset($_GET['wiki']) ? $_GET['wiki'] : '';
