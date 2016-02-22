@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS bot_log (
-	wiki		VARCHAR(30) DEFAULT NULL, // URL of the wiki
+	wiki		VARCHAR(30) DEFAULT NULL, /* URL of the wiki */
 	page_id		INT(11) UNSIGNED DEFAULT NULL,
 	rev_id		INT(11) UNSIGNED DEFAULT NULL,
 	num_links	INT(11) UNSIGNED DEFAULT NULL,
