@@ -4,7 +4,6 @@ require_once( 'api.php' );
 
 if( isset( $_GET['id'] ) ) {
 	$vars = $_GET;
-	var_dump( $vars );
 	addLogRecord( $vars );
 	// $wiki = isset($_GET['wiki']) ? $_GET['wiki'] : '';
 	// $pageId = isset($_GET['page']) ? $_GET['page'] : '';

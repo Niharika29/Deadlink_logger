@@ -3,6 +3,8 @@
 require_once dirname(__FILE__) . '/../config.php';
 
 function addLogRecord( $vars ) {
+		var_dump( $vars );
+
 	$wiki = isset( $vars['wiki']) ? $vars['wiki'] : '';
 	$pageId = isset($vars['page']) ? $vars['page'] : '';
 	$revId = isset($vars['rev']) ? $vars['rev'] : '';
