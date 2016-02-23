@@ -10,9 +10,10 @@ function addLogRecord( $vars, $link ) {
 	$botId = isset( $vars['id'] ) ? $vars['id'] : '';
 	$service = isset( $vars['service'] ) ? $vars['service'] : '';
 	$status = isset( $vars['status'] ) ? $vars['status'] : '';
+	$pageTitle = isset( $vars['title'] ) ? $vars['title'] : '';
 
-	$query = "INSERT INTO bot_log ( wiki, page_id, rev_id, num_links, bot_id, service, status )
-	          VALUES ( '$wiki' , '$pageId' , '$revId' , '$numLinks' , '$botId' , '$service' , '$status' )";
+	$query = "INSERT INTO bot_log ( wiki, page_id, rev_id, num_links, bot_id, service, status, page_title )
+	          VALUES ( '$wiki' , '$pageId' , '$revId' , '$numLinks' , '$botId' , '$service' , '$status', '$pageTitle' )";
 
 	$result = mysqli_query( $link, $query );
 
