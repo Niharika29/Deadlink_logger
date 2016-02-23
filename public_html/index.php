@@ -67,7 +67,7 @@ if ( isset( $_GET['id'] ) ) {
 		$bot = $_POST['bot'];
 		echo " You have chosen ". $bot;
 
-		$url = $lang . $wiki . 'org';
+		$url = $lang . '.' . $wiki . '.' . 'org';
 		if ( $time == 'lweek' ) {
 			$timeDiff = 'DATEADD(DAY, -7, GETDATE())';
 		} else if ( $time == 'lmonth' ) {
@@ -81,7 +81,6 @@ if ( isset( $_GET['id'] ) ) {
 			$query = 'SELECT * FROM bot_log WHERE wiki = "'. $url .'" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
 		}
 		$result = mysqli_query( $link, $query );
-		var_dump( $result );
 	}
 	echo 'Test';
 }
