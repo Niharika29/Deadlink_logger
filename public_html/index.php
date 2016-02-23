@@ -12,11 +12,6 @@ function test_input($data) {
 	return $data;
 }
 
-if ( isset( $_GET['id'] ) ) {
-	$vars = $_GET;
-	addLogRecord( $vars, $link );
-}
-
 ?>
 	<form name="f1" method="post">
 		<select name="time">
@@ -52,7 +47,10 @@ if ( isset( $_GET['id'] ) ) {
 
 <?php
 
-else {
+if ( isset( $_GET['id'] ) ) {
+	$vars = $_GET;
+	addLogRecord( $vars, $link );
+} else {
 	// Frontend graph stuff goes here.
 	if ( isset( $_POST['submit'] ) ) {
 		$ftime = $_POST['time'];
