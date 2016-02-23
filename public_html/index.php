@@ -59,7 +59,7 @@ if ( isset( $_GET['id'] ) ) {
 	// Frontend graph stuff goes here.
 	if ( isset( $_POST['submit'] ) ) {
 		$time = $_POST['time'];
-		echo " You have chosen ". $ftime;
+		echo " You have chosen ". $time;
 		$lang = $_POST['lang'];
 		echo " You have chosen ". $lang;
 		$wiki = $_POST['wiki'];
@@ -76,9 +76,9 @@ if ( isset( $_GET['id'] ) ) {
 			$timeDiff = 'DATEADD(DAY, -365, GETDATE())';
 		}
 		if ( $bot == 'all' ) {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "$url" AND datetime >= "$timeDiff"';
+			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'"';
 		} else {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "$url" AND datetime >= "$timeDiff" AND bot_id = "$bot"';
+			$query = 'SELECT * FROM bot_log WHERE wiki = "'. $url .'" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
 		}
 		$result = mysqli_query( $link, $query );
 		var_dump( $result );
