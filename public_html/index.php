@@ -81,6 +81,14 @@ if ( isset( $_GET['id'] ) ) {
 			$query = 'SELECT * FROM bot_log WHERE wiki = "'. $url .'" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
 		}
 		$result = mysqli_query( $link, $query );
+		if ( $result->num_rows > 0 ) {
+			$html = '<table>';
+			while( $row = $result->fetch_assoc() ) {
+				$html .= '<tr><td>' . $row["wiki"] . '</td><td>' . $row["bot_id"] . '</td><td>' . $row["page_title"] . '</td></tr>';
+			}
+			$html .= '</table>';
+			echo $html;
+		}
 	}
 	echo 'Test';
 }
