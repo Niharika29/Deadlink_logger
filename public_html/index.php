@@ -74,7 +74,7 @@ if ( isset( $_GET['id'] ) ) {
 		}
 		$result = mysqli_query( $link, $query );
 		if ( $result->num_rows > 0 ) {
-			$html. = '<table border="1">';
+			$html. = "<table border='1'>";
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr>'
 							.'<td>'. $row['wiki'] .'</td>'
