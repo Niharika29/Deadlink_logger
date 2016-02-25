@@ -55,6 +55,7 @@ if ( isset( $_GET['id'] ) ) {
 			$html .= '</table>';
 		}
 	}
+	echo $html;
 }
 
 $form = "<form name='f1' method='post'>
