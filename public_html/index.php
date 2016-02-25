@@ -12,10 +12,10 @@ function test_input($data) {
 	return $data;
 }
 
-$bot = 'all';
-$lang = 'en';
-$wiki = 'wikipedia';
-$time = 'lweek';
+// $bot = 'all';
+// $lang = 'en';
+// $wiki = 'wikipedia';
+// $time = 'lweek';
 
 $html = 'Hoops';
 
@@ -53,9 +53,9 @@ if ( isset( $_GET['id'] ) ) {
 						.'</tr>';
 			}
 			$html .= '</table>';
+			echo $html;
 		}
 	}
-	echo $html;
 }
 
 $form = "<form name='f1' method='post'>
