@@ -17,8 +17,7 @@ $lang = 'en';
 $wiki = 'wikipedia';
 $time = 'lweek';
 
-?>
-	<form name="f1" method="post">
+	$html = "<form name="f1" method="post">
 		<select name="time">
 			<option value="lweek" if( $_POST['time'] == 'lweek' ) echo"selected";>Last week</option>
 			<option value="lmonth" if( $_POST['time'] == 'lmonth' ) echo"selected";>Last month</option>
@@ -48,9 +47,7 @@ $time = 'lweek';
 		</select>
 
 		<input type="submit" name="submit" value="Go" />
-	</form>
-
-<?php
+	</form>";
 
 if ( isset( $_GET['id'] ) ) {
 	$vars = $_GET;
@@ -59,14 +56,9 @@ if ( isset( $_GET['id'] ) ) {
 	// Frontend graph stuff goes here.
 	if ( isset( $_POST['submit'] ) ) {
 		$time = $_POST['time'];
-		echo " You have chosen ". $time;
 		$lang = $_POST['lang'];
-		echo " You have chosen ". $lang;
 		$wiki = $_POST['wiki'];
-		echo " You have chosen ". $wiki;
 		$bot = $_POST['bot'];
-		echo " You have chosen ". $bot;
-
 		$url = $lang . '.' . $wiki . '.' . 'org';
 		if ( $time == 'lweek' ) {
 			$timeDiff = 'DATEADD(DAY, -7, GETDATE())';
@@ -82,7 +74,7 @@ if ( isset( $_GET['id'] ) ) {
 		}
 		$result = mysqli_query( $link, $query );
 		if ( $result->num_rows > 0 ) {
-			$html = '<table border="1">';
+			$html. = '<table border="1">';
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr>'
 							.'<td>'. $row['wiki'] .'</td>'
