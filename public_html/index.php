@@ -17,7 +17,7 @@ $lang = 'en';
 $wiki = 'wikipedia';
 $time = 'lweek';
 
-$html = '';
+$html = 'Hoops';
 
 if ( isset( $_GET['id'] ) ) {
 	$vars = $_GET;
