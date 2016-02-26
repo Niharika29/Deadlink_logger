@@ -52,7 +52,6 @@ if ( isset( $_GET['id'] ) ) {
 						.'</tr>';
 			}
 			$html .= '</table>';
-			echo $html;
 		}
 	}
 }
@@ -90,3 +89,7 @@ if ( isset( $_GET['id'] ) ) {
 
 		<input type="submit" name="submit" value="Go" />
 	</form>
+
+<?php
+	echo $html;
+?>
