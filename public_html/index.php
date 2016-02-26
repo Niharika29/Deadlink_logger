@@ -61,7 +61,7 @@ if ( isset( $_GET['id'] ) ) {
 <html>
 	<head>
 		<title>IA bot logs</title>
-		<link rel="stylesheet" type="text/css" href="<?php echo 'css/index.css' ?>">
+		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</head>
 	<body>
 		<div id="form-div">

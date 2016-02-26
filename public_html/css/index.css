@@ -1,9 +1,9 @@
-#form-div : {
+#form-div {
 	padding: 50px auto;
 	text-align: center;
 }
 
-select : {
+select {
 	background: transparent;
 	width: 150px;
 	height: 30px;
