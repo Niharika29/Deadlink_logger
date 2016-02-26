@@ -26,10 +26,9 @@ table {
 	background-color: #4CAF50; /* Green */
 	border: none;
 	color: white;
-	padding: 7px auto;
+	padding: 8px auto;
 	text-align: center;
 	text-decoration: none;
-	border-radius: 20%;
 }
 
 #submit:hover {
