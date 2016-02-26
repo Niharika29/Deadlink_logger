@@ -17,37 +17,40 @@ $lang = 'en';
 $wiki = 'wikipedia';
 $time = 'lweek';
 
-	$html = "<form name='f1' method='post'>
-		<select name='time'>
-			<option value='lweek' if( ". $_POST['time'] ." == 'lweek' ) 'selected';>Last week</option>
-			<option value='lmonth' if( ". $_POST['time'] ." == 'lmonth' ) 'selected';>Last month</option>
-			<option value='lyear' if( ". $_POST['time'] ." == 'lyear' ) 'selected';>Last year</option>
+?>
+	<form name="f1" method="post">
+		<select name="time">
+			<option value="lweek" if( $_POST['time'] == 'lweek' ) echo"selected";>Last week</option>
+			<option value="lmonth" if( $_POST['time'] == 'lmonth' ) echo"selected";>Last month</option>
+			<option value="lyear" if( $_POST['time'] == 'lyear' ) echo"selected";>Last year</option>
 		</select>
 
-		<select name='lang'>
-			<option value='en' if( ". $_POST['lang'] ." == 'en' ) 'selected';>en</option>
-			<option value='de' if( ". $_POST['lang'] ." == 'de' ) 'selected';>de</option>
-			<option value='fr' if( ". $_POST['lang'] ." == 'fr' ) 'selected';>fr</option>
-			<option value='hi' if( ". $_POST['lang'] ." == 'hi' ) 'selected';>hi</option>
-			<option value='he' if( ". $_POST['lang'] ." == 'he' ) 'selected';>he</option>
-			<option value='es' if( ". $_POST['lang'] ." == 'es' ) 'selected';>es</option>
+		<select name="lang">
+			<option value="en" if( $_POST['lang'] == 'en' ) echo"selected";>en</option>
+			<option value="de" if( $_POST['lang'] == 'de' ) echo"selected";>de</option>
+			<option value="fr" if( $_POST['lang'] == 'fr' ) echo"selected";>fr</option>
+			<option value="hi" if( $_POST['lang'] == 'hi' ) echo"selected";>hi</option>
+			<option value="he" if( $_POST['lang'] == 'he' ) echo"selected";>he</option>
+			<option value="es" if( $_POST['lang'] == 'es' ) echo"selected";>es</option>
 		</select>
 
-		<select name='wiki'>
-			<option value='wikipedia if( ". $_POST['wiki'] ." == 'wikipedia' ) 'selected';>wikipedia</option>
-			<option value='wikisource' if( ". $_POST['wiki'] ." == 'wikisource' ) 'selected';>wikisource</option>
-			<option value='wikinews' if( ". $_POST['wiki'] ." == 'wikinews' ) 'selected';>wikinews</option>
+		<select name="wiki">
+			<option value="wikipedia" if( $_POST['wiki'] == 'wikipedia' ) echo"selected";>wikipedia</option>
+			<option value="wikisource" if( $_POST['wiki'] == 'wikisource' ) echo"selected";>wikisource</option>
+			<option value="wikinews" if( $_POST['wiki'] == 'wikinews' ) echo"selected";>wikinews</option>
 		</select>
 
-		<select name='bot'>
-			<option value='all' if( ". $_POST['bot'] ." == 'all' ) 'selected';>All bots</option>
-			<option value='1' if( ". $_POST['bot'] ." == '1' ) 'selected';>Bot 1</option>
-			<option value='2' if( ". $_POST['bot'] ." == '2' ) 'selected';>Bot 2</option>
-			<option value='3' if( ". $_POST['bot'] ." == '3' ) 'selected';>Bot 3</option>
+		<select name="bot">
+			<option value="all" if( $_POST['bot'] == 'all' ) echo"selected";>All bots</option>
+			<option value="1" if( $_POST['bot'] == '1' ) echo"selected";>Bot 1</option>
+			<option value="2" if( $_POST['bot'] == '2' ) echo"selected";>Bot 2</option>
+			<option value="3" if( $_POST['bot'] == '3' ) echo"selected";>Bot 3</option>
 		</select>
 
-		<input type='submit' name='submit' value='Go' />
-	</form>";
+		<input type="submit" name="submit" value="Go" />
+	</form>
+
+<?php
 
 if ( isset( $_GET['id'] ) ) {
 	$vars = $_GET;
@@ -56,9 +59,14 @@ if ( isset( $_GET['id'] ) ) {
 	// Frontend graph stuff goes here.
 	if ( isset( $_POST['submit'] ) ) {
 		$time = $_POST['time'];
+		echo " You have chosen ". $time;
 		$lang = $_POST['lang'];
+		echo " You have chosen ". $lang;
 		$wiki = $_POST['wiki'];
+		echo " You have chosen ". $wiki;
 		$bot = $_POST['bot'];
+		echo " You have chosen ". $bot;
+
 		$url = $lang . '.' . $wiki . '.' . 'org';
 		if ( $time == 'lweek' ) {
 			$timeDiff = 'DATEADD(DAY, -7, GETDATE())';
@@ -74,7 +82,7 @@ if ( isset( $_GET['id'] ) ) {
 		}
 		$result = mysqli_query( $link, $query );
 		if ( $result->num_rows > 0 ) {
-			$html .= '<table>';
+			$html = '<table border="1">';
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr>'
 							.'<td>'. $row['wiki'] .'</td>'
@@ -83,10 +91,8 @@ if ( isset( $_GET['id'] ) ) {
 						.'</tr>';
 			}
 			$html .= '</table>';
+			echo $html;
 		}
 	}
 }
 
-echo $html;
-
-?>
