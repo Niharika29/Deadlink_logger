@@ -1,5 +1,5 @@
 #form-div {
-	padding: 150px auto;
+	padding: auto;
 	text-align: center;
 }
 
@@ -7,10 +7,11 @@ select {
 	background: transparent;
 	width: 150px;
 	height: 30px;
-	font-size: 24px;
+	font-size: 16px;
 }
 
 table {
 	margin: auto;
 	text-align: center;
+	padding-top: 100px;
 }
