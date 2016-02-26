@@ -17,12 +17,53 @@ $lang = 'en';
 $wiki = 'wikipedia';
 $time = 'lweek';
 
+if ( isset( $_GET['id'] ) ) {
+	$vars = $_GET;
+	addLogRecord( $vars, $link );
+} else {
+	// Frontend graph stuff goes here.
+	if ( isset( $_POST['submit'] ) ) {
+		$time = $_POST['time'];
+		$lang = $_POST['lang'];
+		$wiki = $_POST['wiki'];
+		$bot = $_POST['bot'];
+
+		$url = $lang . '.' . $wiki . '.' . 'org';
+		if ( $time == 'lweek' ) {
+			$timeDiff = 'DATEADD(DAY, -7, GETDATE())';
+		} else if ( $time == 'lmonth' ) {
+			$timeDiff = 'DATEADD(DAY, -30, GETDATE())';
+		} else {
+			$timeDiff = 'DATEADD(DAY, -365, GETDATE())';
+		}
+		if ( $bot == 'all' ) {
+			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'"';
+		} else {
+			$query = 'SELECT * FROM bot_log WHERE wiki = "'. $url .'" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
+		}
+		$result = mysqli_query( $link, $query );
+		if ( $result->num_rows > 0 ) {
+			$html = '<table>';
+			while ( $row = $result->fetch_assoc() ) {
+				$html .= '<tr>'
+							.'<td>'. $row['wiki'] .'</td>'
+							.'<td>'. $row['bot_id'] .'</td>'
+							.'<td>'. $row['page_title'] .'</td>'
+						.'</tr>';
+			}
+			$html .= '</table>';
+			echo $html;
+		}
+	}
+}
+
 ?>
-	<form name="f1" method="post">
+
+<form name="f1" method="post">
 		<select name="time">
-			<option value="lweek" if( $_POST['time'] == 'lweek' ) echo"selected";>Last week</option>
-			<option value="lmonth" if( $_POST['time'] == 'lmonth' ) echo"selected";>Last month</option>
-			<option value="lyear" if( $_POST['time'] == 'lyear' ) echo"selected";>Last year</option>
+			<option value="lweek" <?= $time == 'lweek' ? 'selected' : ''?> >Last week</option>
+			<option value="lmonth" <?= $time == 'lmonth' ? 'selected' : ''?> >Last month</option>
+			<option value="lyear" <?= $time == 'lyear' ? 'selected' : ''?> >Last year</option>
 		</select>
 
 		<select name="lang">
@@ -49,50 +90,3 @@ $time = 'lweek';
 
 		<input type="submit" name="submit" value="Go" />
 	</form>
-
-<?php
-
-if ( isset( $_GET['id'] ) ) {
-	$vars = $_GET;
-	addLogRecord( $vars, $link );
-} else {
-	// Frontend graph stuff goes here.
-	if ( isset( $_POST['submit'] ) ) {
-		$time = $_POST['time'];
-		echo " You have chosen ". $time;
-		$lang = $_POST['lang'];
-		echo " You have chosen ". $lang;
-		$wiki = $_POST['wiki'];
-		echo " You have chosen ". $wiki;
-		$bot = $_POST['bot'];
-		echo " You have chosen ". $bot;
-
-		$url = $lang . '.' . $wiki . '.' . 'org';
-		if ( $time == 'lweek' ) {
-			$timeDiff = 'DATEADD(DAY, -7, GETDATE())';
-		} else if ( $time == 'lmonth' ) {
-			$timeDiff = 'DATEADD(DAY, -30, GETDATE())';
-		} else {
-			$timeDiff = 'DATEADD(DAY, -365, GETDATE())';
-		}
-		if ( $bot == 'all' ) {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'"';
-		} else {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "'. $url .'" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
-		}
-		$result = mysqli_query( $link, $query );
-		if ( $result->num_rows > 0 ) {
-			$html = '<table border="1">';
-			while ( $row = $result->fetch_assoc() ) {
-				$html .= '<tr>'
-							.'<td>'. $row['wiki'] .'</td>'
-							.'<td>'. $row['bot_id'] .'</td>'
-							.'<td>'. $row['page_title'] .'</td>'
-						.'</tr>';
-			}
-			$html .= '</table>';
-			echo $html;
-		}
-	}
-}
-
