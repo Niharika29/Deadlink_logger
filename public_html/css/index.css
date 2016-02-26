@@ -1,0 +1,10 @@
+#form-div : {
+	padding: 50px auto;
+	text-align: center;
+}
+
+select : {
+	background: transparent;
+	width: 150px;
+	height: 30px;
+}
