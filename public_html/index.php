@@ -44,7 +44,7 @@ if ( isset( $_GET['id'] ) ) {
 		$result = mysqli_query( $link, $query );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
-			$html .= '<tr><th>Wiki</th><th>Bot</th>';
+			$html .= '<tr><th>Wiki</th><th>Bot</th><th>Page title</th>';
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr>'
 							.'<td>'. $row['wiki'] .'</td>'
@@ -61,7 +61,7 @@ if ( isset( $_GET['id'] ) ) {
 <html>
 	<head>
 		<title>IA bot logs</title>
-		<link rel="stylesheet" type="text/css" href="css/index.css">
+		<link rel="stylesheet" type="text/css" href=<?="css/index.css"?>>
 	</head>
 	<body>
 		<div id="form-div">
