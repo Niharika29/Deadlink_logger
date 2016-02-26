@@ -43,7 +43,7 @@ if ( isset( $_GET['id'] ) ) {
 		}
 		$result = mysqli_query( $link, $query );
 		if ( $result->num_rows > 0 ) {
-			$html = '<table id="results">';
+			$html = '<table id="results" border="1">';
 			$html .= '<tr><th>Wiki</th><th>Bot</th><th>Page title</th>';
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr>'
@@ -94,7 +94,7 @@ if ( isset( $_GET['id'] ) ) {
 					<option value="3" if( <?= $bot == '3' ? 'selected' : '' ?> >Bot 3</option>
 				</select>
 
-				<input type="submit" name="submit" value="Go" />
+				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
 	</body>
