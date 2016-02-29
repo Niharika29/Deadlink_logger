@@ -62,7 +62,7 @@ if ( isset( $_GET['id'] ) ) {
 	<head>
 		<title>IA bot logs</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
-<script src="js/Chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	</head>
 	<body>
