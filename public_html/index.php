@@ -64,7 +64,6 @@ if ( isset( $_GET['id'] ) ) {
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 <script src="https://cdnjs.com/libraries/chart.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-<script src="js/index.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<canvas id="myChart" width="200" height="200"></canvas>
@@ -101,6 +100,7 @@ if ( isset( $_GET['id'] ) ) {
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
+		<script src="js/index.js" type="text/javascript"></script>
 	</body>
 </html>
 
