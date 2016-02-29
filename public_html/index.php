@@ -67,9 +67,7 @@ if ( isset( $_GET['id'] ) ) {
 <script src="js/index.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<div id="chart-div">
-			<canvas id="myChart" width="200" height="200"></canvas>
-		</div>
+		<canvas id="myChart" width="200" height="200"></canvas>
 		<div id="form-div">
 			<form name="f1" method="post">
 				<select name="time">
