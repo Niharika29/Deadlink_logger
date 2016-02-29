@@ -1,13 +1,12 @@
-#chart-div {
-	width: 80%;
-	height: 100px;
-	border: 1px solid green;
+#bot-chart {
+	width: 70%;
+	height: 300px;
+	margin: auto;
 }
 
 #form-div {
 	text-align: center;
 	padding-top: 30px;
-	border: 1px solid red;
 	width: 80%;
 }
 
@@ -22,7 +21,6 @@ table {
 	margin: auto;
 	text-align: center;
 	padding-top: 30px;
-	border: 1px solid black;
 }
 
 #submit {

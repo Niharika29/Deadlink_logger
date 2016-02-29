@@ -66,7 +66,6 @@ if ( isset( $_GET['id'] ) ) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	</head>
 	<body>
-		<canvas id="myChart" width="200" height="200"></canvas>
 		<div id="form-div">
 			<form name="f1" method="post">
 				<select name="time">
@@ -96,10 +95,10 @@ if ( isset( $_GET['id'] ) ) {
 					<option value="2" if( <?= $bot == '2' ? 'selected' : '' ?> >Bot 2</option>
 					<option value="3" if( <?= $bot == '3' ? 'selected' : '' ?> >Bot 3</option>
 				</select>
-
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
+		<canvas id="bot-chart"></canvas>
 		<script src="js/index.js" type="text/javascript"></script>
 	</body>
 </html>
