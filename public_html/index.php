@@ -45,7 +45,7 @@ if ( isset( $_GET['id'] ) ) {
 		$chart = 'SELECT SUM( num_links ) AS total GROUP BY bot_id';
 		$result = mysqli_query( $link, $query );
 		$chartData = mysqli_query( $link, $chart );
-		var_dump( $chartData );
+		var_dump( $chartData->num_rows );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
 			$html .= '<tr>
