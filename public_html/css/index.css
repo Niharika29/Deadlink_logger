@@ -28,6 +28,7 @@ select {
 
 table {
 	margin: auto;
+	padding: 30px;
 	text-align: center;
 	color:#666;
 	font-size:16px;
@@ -45,7 +46,6 @@ table {
 
 table tr {
 	text-align: center;
-	padding-left: 20px;
 }
 
 table th {
