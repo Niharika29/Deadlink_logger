@@ -46,7 +46,7 @@ if ( isset( $_GET['id'] ) ) {
 		$chartData = mysqli_query( $link, $chart );
 		$data = array();
 		while ( $row = $chartData->fetch_assoc() ) {
-			var_dump( $row );
+			$data[$row['day']] => $row['totalnum'];
 		}
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
@@ -118,6 +118,8 @@ if ( isset( $_GET['id'] ) ) {
 		</div>
 		<canvas id="bot-chart" width="50%" height="300"></canvas>
 		<?=$html?>
-		<script src="js/index.js" type="text/javascript"></script>
+<script src="js/index.js" type="text/javascript"></script>
 	</body>
+<script type="text/javascript">
+</script>
 </html>
