@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS bot_log (
 	rev_id				INT(11) UNSIGNED DEFAULT NULL,
 	links_fixed			INT(11) UNSIGNED DEFAULT NULL,
 	links_not_fixed		INT(11) UNSIGNED DEFAULT NULL,
-	bot					VARCHAR(32) UNSIGNED NOT NULL,
+	bot					VARCHAR(30) UNSIGNED NOT NULL,
 	service				VARCHAR(30) DEFAULT NULL,
 	status				ENUM('fixed', 'posted') DEFAULT NULL,
 	page_title			VARCHAR(255) DEFAULT NULL,
