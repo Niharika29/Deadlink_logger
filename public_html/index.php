@@ -43,13 +43,25 @@ if ( isset( $_GET['id'] ) ) {
 		}
 		$result = mysqli_query( $link, $query );
 		if ( $result->num_rows > 0 ) {
-			$html = '<table id="results" border="1">';
-			$html .= '<tr><th>Wiki</th><th>Bot</th><th>Page title</th>';
+			$html = '<table id="results">';
+			$html .= '<tr>
+						<th>Wiki</th>
+						<th>Bot</th>
+						<th>Page title</th>
+						<th>Page ID</th>
+						<th>Revision ID</th>
+						<th>Links fixed</th>
+						<th>Service used</th>
+					</tr>';
 			while ( $row = $result->fetch_assoc() ) {
-				$html .= '<tr>'
+				$html .= '<tr class="trow">'
 							.'<td>'. $row['wiki'] .'</td>'
 							.'<td>'. $row['bot_id'] .'</td>'
 							.'<td>'. $row['page_title'] .'</td>'
+							.'<td>'. $row['page_id'] .'</td>'
+							.'<td>'. $row['rev_id'] .'</td>'
+							.'<td>'. $row['num_links'] .'</td>'
+							.'<td>'. $row['service'] .'</td>'
 						.'</tr>';
 			}
 			$html .= '</table>';
@@ -98,7 +110,7 @@ if ( isset( $_GET['id'] ) ) {
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
-		<canvas id="bot-chart"></canvas>
+		<canvas id="bot-chart" width="50%" height="300"></canvas>
 		<script src="js/index.js" type="text/javascript"></script>
 	</body>
 </html>
