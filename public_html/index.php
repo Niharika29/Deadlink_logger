@@ -111,10 +111,7 @@ if ( isset( $_GET['id'] ) ) {
 			</form>
 		</div>
 		<canvas id="bot-chart" width="50%" height="300"></canvas>
+		<?=$html?>
 		<script src="js/index.js" type="text/javascript"></script>
 	</body>
 </html>
-
-<?php
-	echo $html;
-?>

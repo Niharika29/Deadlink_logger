@@ -5,10 +5,18 @@
 	padding: 10px auto;
 }
 
+canvas {
+	padding: 0;
+	margin: auto;
+	display: block;
+	width: 800px;
+}
+
 #form-div {
 	text-align: center;
 	padding-top: 30px;
 	width: 80%;
+	margin: auto;
 }
 
 select {
