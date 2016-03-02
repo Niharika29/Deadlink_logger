@@ -1,6 +1,4 @@
 #bot-chart {
-	width: 900px;
-	height: 500px;
 	margin: auto;
 	padding: 10px auto;
 }
@@ -9,7 +7,6 @@ canvas {
 	padding: 20px;
 	margin: auto;
 	display: block;
-	width: 900px;
 }
 
 #legend {
@@ -24,6 +21,12 @@ span {
 	width: 12px;
 	height: 12px;
 	margin-right: 5px;
+	clear: none;
+	float: left;
+}
+
+ul {
+	list-style-type: none;
 }
 
 #form-div {
