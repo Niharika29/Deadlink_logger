@@ -94,7 +94,6 @@ if ( isset( $_GET['id'] ) ) {
 			<?=json_encode( array_values( $dataf ) )?>,
 			<?=json_encode( array_values( $datan ) )?>
 		);
-		$( '#submit' ).click();
 	})
 </script>
 	</head>
