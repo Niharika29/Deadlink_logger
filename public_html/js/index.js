@@ -4,8 +4,7 @@ function displayChart( fixed, fvalues, nvalues ) {
 	var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
 	var data = {
 		labels: fixed,
-		legendTemplate : "<ul><li><span style=\"background-color:#b47ec8\"></span>Links fixed</li>
-						 <li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
+		legendTemplate : "<ul><li><span style=\"background-color:#b47ec8\"></span>Links fixed</li><li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
 		datasets: [
 			{
 				label: "Bot links fixed chart",
