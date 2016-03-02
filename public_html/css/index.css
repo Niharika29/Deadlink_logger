@@ -14,10 +14,15 @@ canvas {
 	width: 250px;
 }
 
+li {
+	float: left;
+	margin: 5px;
+}
+
 span {
 	display: inline-block;
-	width: 12px;
-	height: 12px;
+	width: 20px;
+	height: 14px;
 	margin-right: 5px;
 	clear: none;
 	float: left;
