@@ -31,6 +31,6 @@ function displayChart( fixed, fvalues, nvalues ) {
 	// 	legendTemplate : "<ul><li><span style=\"background-color:#b47ec8; width:10px; height:10px\"></span>Links fixed</li><li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
 	// }
 	var myLineChart = new Chart( ctx ).Line( data );
-	$( '#legend' ).html( myLineChart.generateLegend() );
+	// $( '#legend' ).html( myLineChart.generateLegend() );
 }
 
