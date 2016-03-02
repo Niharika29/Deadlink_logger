@@ -30,7 +30,7 @@ if ( isset( $_GET['id'] ) ) {
 
 		$url = $lang . '.' . $wiki . '.' . 'org';
 		if ( $time == 'lweek' ) {
-			$timeDiff = 'DATEADD(DAY, -3, GETDATE())';
+			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 7 DAY)';
 		} else if ( $time == 'lmonth' ) {
 			$timeDiff = 'DATEADD(DAY, -30, GETDATE())';
 		} else {
@@ -42,7 +42,7 @@ if ( isset( $_GET['id'] ) ) {
 			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
 		}
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
-				FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 2 DAY)
+				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
 		var_dump( $chart );
 		$result = mysqli_query( $link, $query );
