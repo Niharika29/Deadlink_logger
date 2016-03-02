@@ -85,7 +85,6 @@ if ( isset( $_GET['id'] ) ) {
 <html>
 	<head>
 		<title>IA bot logs</title>
-		<link rel="stylesheet" type="text/css" href="css/index.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="js/index.js" type="text/javascript"></script>
@@ -134,5 +133,6 @@ if ( isset( $_GET['id'] ) ) {
 		<canvas id="bot-chart" width="50%" height="300"></canvas>
 		<div id="legend"></div>
 		<?=$html?>
+		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</body>
 </html>
