@@ -42,7 +42,7 @@ if ( isset( $_GET['id'] ) ) {
 			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
 		}
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
-				FROM bot_log WHERE 'datetime' >=  DATE_SUB(CURDATE(), INTERVAL 2 DAY)
+				FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 2 DAY)
 				GROUP BY CAST( datetime AS DATE )";
 		var_dump( $chart );
 		$result = mysqli_query( $link, $query );
@@ -51,6 +51,7 @@ if ( isset( $_GET['id'] ) ) {
 		while ( $row = $chartData->fetch_assoc() ) {
 			$data[$row['day']] = $row['totalnum'];
 		}
+		var_dump( $data );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
 			$html .= '<tr>
