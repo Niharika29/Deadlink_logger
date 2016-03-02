@@ -7,7 +7,7 @@ function displayChart( fixed, fvalues, nvalues ) {
 		datasets: [
 			{
 				label: "Bot links fixed chart",
-				fillColor: "rgba(225, 193, 223, 1)",
+				// fillColor: "rgba(225, 193, 223, 1)",
 				strokeColor: "rgba(207, 155, 203, 1)",
 				pointColor: "rgba(169, 81, 163, 1)",
 				pointStrokeColor: "#fff",
