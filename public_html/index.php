@@ -53,7 +53,7 @@ if ( isset( $_GET['id'] ) ) {
 		while ( $row = $chartData->fetch_assoc() ) {
 			$data[$row['day']] = $row['totalnum'];
 		}
-		var_dump( $query );
+		var_dump( $result );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
 			$html .= '<tr>
