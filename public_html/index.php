@@ -46,7 +46,7 @@ if ( isset( $_GET['id'] ) ) {
 		$chartData = mysqli_query( $link, $chart );
 		$data = array();
 		while ( $row = $chartData->fetch_assoc() ) {
-			$data[$row['day']] => $row['totalnum'];
+			$data[$row['day']] = $row['totalnum'];
 		}
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
