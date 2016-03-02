@@ -13,7 +13,7 @@ function displayChart( keys, values ) {
 				pointStrokeColor: "rgba(126, 188, 237, 1)",
 				pointHighlightFill: "rgba(41, 145, 224, 1)",
 				pointHighlightStroke: "#fff",
-				data = values
+				data: values
 			}
 		]
 	};
