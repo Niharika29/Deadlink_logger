@@ -17,7 +17,7 @@ function displayChart( fixed, fvalues, nvalues ) {
 			},
 			{
 				label: "Bot links not fixed chart",
-				fillColor: "rgba(165, 248, 176, 1)",
+				// fillColor: "rgba(165, 248, 176, 1)",
 				strokeColor: "rgba(16, 218, 43, 1)",
 				pointColor: "rgba(63, 171, 78, 1)",
 				pointStrokeColor: "#fff",
