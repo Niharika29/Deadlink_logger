@@ -49,10 +49,13 @@ if ( isset( $_GET['id'] ) ) {
 		}
 		$chartData = mysqli_query( $link, $chart );
 		$data = array();
-		while ( $row = $chartData->fetch_assoc() ) {
-			$data[$row['day']] = $row['totalnum'];
+		if ( $chartData->num_rows > 0 ) {
+			while ( $row = $chartData->fetch_assoc() ) {
+				$data[$row['day']] = $row['totalnum'];
+			}
 		}
 		$result = mysqli_query( $link, $query );
+		var_dump( $query, $result );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
 			$html .= '<tr>
