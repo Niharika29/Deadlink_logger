@@ -6,7 +6,7 @@ function displayChart( fixed, fvalues, nvalues ) {
 		labels: fixed,
 		datasets: [
 			{
-				label: "Bot links fixed chart",
+				label: "Links fixed",
 				fillColor: "rgba(0, 0, 0, 0)",
 				strokeColor: "#b47ec8",
 				pointColor: "#7f4096",
@@ -16,7 +16,7 @@ function displayChart( fixed, fvalues, nvalues ) {
 				data: fvalues
 			},
 			{
-				label: "Bot links not fixed chart",
+				label: "Links not fixed",
 				fillColor: "rgba(0, 0, 0, 0)",
 				strokeColor: "#ef9048",
 				pointColor: "#b75810",
@@ -27,9 +27,9 @@ function displayChart( fixed, fvalues, nvalues ) {
 			}
 		]
 	};
-	var options = {
-		legendTemplate : "<ul><li><span style=\"background-color:#b47ec8; width:10px; height:10px\"></span>Links fixed</li><li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
-	}
+	// var options = {
+	// 	legendTemplate : "<ul><li><span style=\"background-color:#b47ec8; width:10px; height:10px\"></span>Links fixed</li><li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
+	// }
 	var myLineChart = new Chart( ctx ).Line( data );
 	$( '#legend' ).html( myLineChart.generateLegend() );
 }

@@ -13,9 +13,10 @@ canvas {
 }
 
 #legend {
-	padding: 20px;
+	padding: 10px;
 	margin: auto;
 	display: block;
+	width: 250px;
 }
 
 span {
