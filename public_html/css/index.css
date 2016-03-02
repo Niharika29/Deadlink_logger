@@ -8,7 +8,9 @@ canvas {
 }
 
 #legend {
-	padding: 10px;
+	width: 50px;
+	height: 50px;
+	padding: 5px;
 	margin: auto;
 	display: block;
 	width: 250px;
@@ -21,8 +23,8 @@ li {
 
 span {
 	display: inline-block;
-	width: 20px;
-	height: 14px;
+	width: 12px;
+	height: 10px;
 	margin-right: 5px;
 	clear: none;
 	float: left;
