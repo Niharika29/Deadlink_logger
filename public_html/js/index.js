@@ -1,6 +1,6 @@
 // Get context with jQuery - using jQuery's .get() method.
 function displayChart( fixed, fvalues, nvalues ) {
-	console.log( keys, values );
+	// console.log( keys, values );
 	var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
 	var data = {
 		labels: fixed,

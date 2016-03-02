@@ -30,14 +30,12 @@ if ( isset( $_GET['id'] ) ) {
 			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 		}
 		if ( $bot == 'all' ) {
-			$query = "SELECT *, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff";
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day, FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff";
 			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
 		} else {
-			$query = "SELECT *, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff AND bot = '$bot'";
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day, FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff AND bot = '$bot'";
 			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot'
 				GROUP BY CAST( datetime AS DATE )";
@@ -73,8 +71,8 @@ if ( isset( $_GET['id'] ) ) {
 							.'<td>'. $row['page_title'] .'</td>'
 							.'<td>'. $row['page_id'] .'</td>'
 							.'<td>'. $row['rev_id'] .'</td>'
-							.'<td>'. $row['numf'] .'</td>'
-							.'<td>'. $row['numn'] .'</td>'
+							.'<td>'. $row['links_fixed'] .'</td>'
+							.'<td>'. $row['links_not_fixed'] .'</td>'
 							.'<td>'. $row['service'] .'</td>'
 							.'<td>'. $row['day'] .'</td>'
 						.'</tr>';
