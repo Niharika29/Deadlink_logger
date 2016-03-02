@@ -121,5 +121,8 @@ if ( isset( $_GET['id'] ) ) {
 <script src="js/index.js" type="text/javascript"></script>
 	</body>
 <script type="text/javascript">
+	$( document ).ready( function(){
+		displayChart( <?=array_keys( $data )?>, <?=array_values( $data )?> );
+	})
 </script>
 </html>
