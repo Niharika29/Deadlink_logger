@@ -10,8 +10,8 @@ function displayChart( keys, values ) {
 				fillColor: "rgba(225, 193, 223, 1)",
 				strokeColor: "rgba(207, 155, 203, 1)",
 				pointColor: "rgba(169, 81, 163, 1)",
-				pointStrokeColor: "rgba(126, 188, 237, 1)",
-				pointHighlightFill: "rgba(41, 145, 224, 1)",
+				pointStrokeColor: "#fff",
+				pointHighlightFill: "#fff",
 				pointHighlightStroke: "#fff",
 				data: values
 			}
