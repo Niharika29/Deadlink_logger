@@ -3,7 +3,7 @@ function displayChart( keys, values ) {
 	console.log( labels, values );
 	var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
 	var data = {
-		label: keys,
+		labels: ['24-10-2016', '25-10-2016'],
 		datasets: [
 			{
 				label: "Bot activity chart",
