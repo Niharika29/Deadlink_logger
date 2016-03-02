@@ -8,12 +8,11 @@ canvas {
 }
 
 #legend {
-	width: 50px;
 	height: 50px;
 	padding: 5px;
 	margin: auto;
 	display: block;
-	width: 250px;
+	width: 300px;
 }
 
 li {
