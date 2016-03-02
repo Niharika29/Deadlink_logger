@@ -20,6 +20,7 @@ $time = 'lweek';
 if ( isset( $_GET['id'] ) ) {
 	$vars = $_GET;
 	addLogRecord( $vars, $link );
+	die();
 } else {
 	// Frontend graph stuff goes here.
 	if ( isset( $_POST['submit'] ) ) {
@@ -39,7 +40,7 @@ if ( isset( $_GET['id'] ) ) {
 		if ( $bot == 'all' ) {
 			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'"';
 		} else {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "'. $url .'" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
+			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
 		}
 		$chart = 'SELECT CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum FROM bot_log GROUP BY CAST( datetime AS DATE )';
 		$result = mysqli_query( $link, $query );
