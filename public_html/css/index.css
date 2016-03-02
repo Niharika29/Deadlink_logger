@@ -32,7 +32,6 @@ table {
 	color:#666;
 	font-size:16px;
 	text-shadow: 1px 1px 0px #fff;
-	background: white;
 	border:#ccc 1px solid;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
@@ -60,7 +59,7 @@ table td {
 	border-top: 1px solid #ffffff;
 	border-bottom:1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
-	background: #fafafa;
+	background: white;
 	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
 	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
 }
