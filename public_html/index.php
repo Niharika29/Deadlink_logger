@@ -37,7 +37,7 @@ if ( isset( $_GET['id'] ) ) {
 			$timeDiff = 'DATEADD(DAY, -365, GETDATE())';
 		}
 		if ( $bot == 'all' ) {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= '. $timeDiff '';
+			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= '. $timeDiff;
 		} else {
 			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
 		}
