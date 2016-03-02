@@ -38,12 +38,15 @@ if ( isset( $_GET['id'] ) ) {
 		}
 		if ( $bot == 'all' ) {
 			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= $timeDiff';
-		} else {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= $timeDiff AND bot_id = "'. $bot .'"';
-		}
-		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
+			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
 				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
+		} else {
+			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= $timeDiff AND bot_id = "'. $bot .'"';
+			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
+				FROM bot_log WHERE datetime >= $timeDiff AND bot_id = $bot
+				GROUP BY CAST( datetime AS DATE )";
+		}
 		var_dump( $chart );
 		$result = mysqli_query( $link, $query );
 		$chartData = mysqli_query( $link, $chart );
