@@ -20,7 +20,6 @@ $time = 'lweek';
 if ( isset( $_GET['id'] ) ) {
 	$vars = $_GET;
 	addLogRecord( $vars, $link );
-	die();
 } else {
 	// Frontend graph stuff goes here.
 	if ( isset( $_POST['submit'] ) ) {
