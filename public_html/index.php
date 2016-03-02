@@ -122,7 +122,7 @@ if ( isset( $_GET['id'] ) ) {
 	</body>
 <script type="text/javascript">
 	$( document ).ready( function(){
-		displayChart( <?=array_keys( $data )?>, <?=array_values( $data )?> );
+		displayChart( <?=json_encode( array_keys( $data ) )?>, <?=json_encode( array_values( $data ) )?> );
 	})
 </script>
 </html>
