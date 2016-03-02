@@ -94,7 +94,10 @@ if ( isset( $_GET['id'] ) ) {
 <script src="js/index.js" type="text/javascript"></script>
 <script type="text/javascript">
 	$( document ).ready( function(){
-		displayChart( <?=json_encode( array_keys( $data ) )?>, <?=json_encode( array_values( $data ) )?> );
+		displayChart( <?=json_encode( array_keys( $dataf ) )?>,
+			<?=json_encode( array_values( $dataf ) )?>,
+			<?=json_encode( array_values( $datan ) )?>
+		);
 	})
 </script>
 	</head>
