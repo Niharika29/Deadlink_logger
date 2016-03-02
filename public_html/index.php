@@ -50,7 +50,7 @@ if ( isset( $_GET['id'] ) ) {
 			}
 		}
 		$result = mysqli_query( $link, $query );
-		var_dump( $chart, $chartData );
+		var_dump( $chart, $chartData, $query, $result );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
 			$html .= '<tr>
