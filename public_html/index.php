@@ -130,7 +130,7 @@ if ( isset( $_GET['id'] ) ) {
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
-		<canvas id="bot-chart" width="50%" height="300"></canvas>
+		<canvas id="bot-chart"></canvas>
 		<div id="legend"></div>
 		<?=$html?>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
