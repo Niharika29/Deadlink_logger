@@ -30,21 +30,25 @@ if ( isset( $_GET['id'] ) ) {
 			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 		}
 		if ( $bot == 'all' ) {
-			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff";
-			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numnotf
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
+				FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff";
+			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
 		} else {
-			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff AND bot = $bot";
-			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numnotf
-				FROM bot_log WHERE datetime >= $timeDiff AND bot = $bot
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
+				FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff AND bot = '$bot'";
+			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
+				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot'
 				GROUP BY CAST( datetime AS DATE )";
 		}
 		$chartData = mysqli_query( $link, $chart );
-		$data = array();
+		$dataf = array();
+		$datan = array();
 		if ( $chartData->num_rows > 0 ) {
 			while ( $row = $chartData->fetch_assoc() ) {
-				$data[$row['day']] = $row['totalnum'];
+				$dataf[$row['day']] = $row['numf'];
+				$datan[$row['day']] = $row['numn'];
 			}
 		}
 		$result = mysqli_query( $link, $query );
@@ -70,7 +74,7 @@ if ( isset( $_GET['id'] ) ) {
 							.'<td>'. $row['page_id'] .'</td>'
 							.'<td>'. $row['rev_id'] .'</td>'
 							.'<td>'. $row['numf'] .'</td>'
-							.'<td>'. $row['numnotf'] .'</td>'
+							.'<td>'. $row['numn'] .'</td>'
 							.'<td>'. $row['service'] .'</td>'
 							.'<td>'. $row['day'] .'</td>'
 						.'</tr>';
