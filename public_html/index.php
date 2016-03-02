@@ -37,12 +37,12 @@ if ( isset( $_GET['id'] ) ) {
 			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 		}
 		if ( $bot == 'all' ) {
-			$query = "SELECT * FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff";
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff";
 			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
 				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
 		} else {
-			$query = "SELECT * FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff AND bot_id = $bot";
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff AND bot_id = $bot";
 			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
 				FROM bot_log WHERE datetime >= $timeDiff AND bot_id = $bot
 				GROUP BY CAST( datetime AS DATE )";
@@ -55,6 +55,7 @@ if ( isset( $_GET['id'] ) ) {
 			}
 		}
 		$result = mysqli_query( $link, $query );
+		var_dump( $query, $result, $chartData, $chart );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
 			$html .= '<tr>
@@ -65,6 +66,7 @@ if ( isset( $_GET['id'] ) ) {
 						<th>Revision ID</th>
 						<th>Links fixed</th>
 						<th>Service used</th>
+						<th>Date</th>
 					</tr>';
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr class="trow">'
@@ -75,6 +77,7 @@ if ( isset( $_GET['id'] ) ) {
 							.'<td>'. $row['rev_id'] .'</td>'
 							.'<td>'. $row['num_links'] .'</td>'
 							.'<td>'. $row['service'] .'</td>'
+							.'<td>'. $row['day'] .'</td>'
 						.'</tr>';
 			}
 			$html .= '</table>';
