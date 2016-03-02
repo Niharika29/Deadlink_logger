@@ -4,15 +4,17 @@ function displayChart( fixed, fvalues, nvalues ) {
 	var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
 	var data = {
 		labels: fixed,
+		legendTemplate : "<ul><li><span style=\"background-color:#b47ec8\"></span>Links fixed</li>
+						 <li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
 		datasets: [
 			{
 				label: "Bot links fixed chart",
 				fillColor: "rgba(0, 0, 0, 0)",
-				strokeColor: "rgba(207, 155, 203, 1)",
-				pointColor: "rgba(169, 81, 163, 1)",
+				strokeColor: "#b47ec8",
+				pointColor: "#7f4096",
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
-				pointHighlightStroke: "rgba(207, 155, 203, 1)",
+				pointHighlightStroke: "#b47ec8",
 				data: fvalues
 			},
 			{
