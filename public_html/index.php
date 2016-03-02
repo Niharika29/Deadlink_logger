@@ -35,9 +35,9 @@ if ( isset( $_GET['id'] ) ) {
 				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
 		} else {
-			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff AND bot_id = $bot";
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff AND bot = $bot";
 			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
-				FROM bot_log WHERE datetime >= $timeDiff AND bot_id = $bot
+				FROM bot_log WHERE datetime >= $timeDiff AND bot = $bot
 				GROUP BY CAST( datetime AS DATE )";
 		}
 		$chartData = mysqli_query( $link, $chart );
