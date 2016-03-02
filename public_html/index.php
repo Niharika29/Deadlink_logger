@@ -44,7 +44,7 @@ if ( isset( $_GET['id'] ) ) {
 		$chart = 'SELECT CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
 				FROM bot_log WHERE datetime >=  "$timeDiff"
 				GROUP BY CAST( datetime AS DATE )';
-		var_dump( $timeDiff );
+		var_dump( $chart );
 		$result = mysqli_query( $link, $query );
 		$chartData = mysqli_query( $link, $chart );
 		$data = array();
