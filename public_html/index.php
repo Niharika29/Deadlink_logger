@@ -37,12 +37,12 @@ if ( isset( $_GET['id'] ) ) {
 			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 		}
 		if ( $bot == 'all' ) {
-			$query = "SELECT * FROM bot_log WHERE wiki = " . $url . " AND datetime >= $timeDiff";
+			$query = "SELECT * FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff";
 			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
 				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
 		} else {
-			$query = "SELECT * FROM bot_log WHERE wiki = " . $url . " AND datetime >= $timeDiff AND bot_id = $bot";
+			$query = "SELECT * FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff AND bot_id = $bot";
 			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
 				FROM bot_log WHERE datetime >= $timeDiff AND bot_id = $bot
 				GROUP BY CAST( datetime AS DATE )";
