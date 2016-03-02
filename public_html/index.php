@@ -82,6 +82,12 @@ if ( isset( $_GET['id'] ) ) {
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script src="js/index.js" type="text/javascript"></script>
+<script type="text/javascript">
+	$( document ).ready( function(){
+		displayChart( <?=json_encode( array_keys( $data ) )?>, <?=json_encode( array_values( $data ) )?> );
+	})
+</script>
 	</head>
 	<body>
 		<div id="form-div">
@@ -118,11 +124,5 @@ if ( isset( $_GET['id'] ) ) {
 		</div>
 		<canvas id="bot-chart" width="50%" height="300"></canvas>
 		<?=$html?>
-<script src="js/index.js" type="text/javascript"></script>
 	</body>
-<script type="text/javascript">
-	$( document ).ready( function(){
-		displayChart( <?=json_encode( array_keys( $data ) )?>, <?=json_encode( array_values( $data ) )?> );
-	})
-</script>
 </html>

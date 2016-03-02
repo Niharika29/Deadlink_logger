@@ -1,13 +1,12 @@
 // Get context with jQuery - using jQuery's .get() method.
-var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
-
 function displayChart( keys, values ) {
 	console.log( labels, values );
+	var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
 	var data = {
 		labels: keys,
 		datasets: [
 			{
-				label: "Bot activity chart"
+				label: "Bot activity chart",
 				fillColor: "rgba(225, 193, 223, 1)",
 				strokeColor: "rgba(207, 155, 203, 1)",
 				pointColor: "rgba(169, 81, 163, 1)",
