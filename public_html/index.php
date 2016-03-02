@@ -32,17 +32,17 @@ if ( isset( $_GET['id'] ) ) {
 		if ( $time == 'lweek' ) {
 			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 7 DAY)';
 		} else if ( $time == 'lmonth' ) {
-			$timeDiff = 'DATEADD(DAY, -30, GETDATE())';
+			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 MONTH)';
 		} else {
-			$timeDiff = 'DATEADD(DAY, -365, GETDATE())';
+			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 		}
 		if ( $bot == 'all' ) {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >=  "$timeDiff"';
+			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime BETWEEN $timeDiff AND CURDATE()';
 		} else {
-			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime >= "'. $timeDiff .'" AND bot_id = "'. $bot .'"';
+			$query = 'SELECT * FROM bot_log WHERE wiki = "' . $url . '" AND datetime BETWEEN $timeDiff AND CURDATE() AND bot_id = "'. $bot .'"';
 		}
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
-				FROM bot_log WHERE datetime >= $timeDiff
+				FROM bot_log WHERE datetime BETWEEN $timeDiff AND CURDATE()
 				GROUP BY CAST( datetime AS DATE )";
 		var_dump( $chart );
 		$result = mysqli_query( $link, $query );
