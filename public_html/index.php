@@ -5,13 +5,6 @@ require_once dirname(__FILE__) . '/../config.php';
 
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
-function test_input($data) {
-	$data = trim($data);
-	$data = stripslashes($data);
-	$data = htmlspecialchars($data);
-	return $data;
-}
-
 $bot = 'all';
 $lang = 'en';
 $wiki = 'wikipedia';
@@ -64,17 +57,19 @@ if ( isset( $_GET['id'] ) ) {
 						<th>Page ID</th>
 						<th>Revision ID</th>
 						<th>Links fixed</th>
+						<th>Links not fixed</th>
 						<th>Service used</th>
 						<th>Date</th>
 					</tr>';
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr class="trow">'
 							.'<td>'. $row['wiki'] .'</td>'
-							.'<td>'. $row['bot_id'] .'</td>'
+							.'<td>'. $row['bot'] .'</td>'
 							.'<td>'. $row['page_title'] .'</td>'
 							.'<td>'. $row['page_id'] .'</td>'
 							.'<td>'. $row['rev_id'] .'</td>'
-							.'<td>'. $row['num_links'] .'</td>'
+							.'<td>'. $row['links_fixed'] .'</td>'
+							.'<td>'. $row['links_not_fixed'] .'</td>'
 							.'<td>'. $row['service'] .'</td>'
 							.'<td>'. $row['day'] .'</td>'
 						.'</tr>';
@@ -124,9 +119,9 @@ if ( isset( $_GET['id'] ) ) {
 
 				<select name="bot">
 					<option value="all" if( <?= $bot == 'all' ? 'selected' : '' ?> >All bots</option>
-					<option value="1" if( <?= $bot == '1' ? 'selected' : '' ?> >Bot 1</option>
-					<option value="2" if( <?= $bot == '2' ? 'selected' : '' ?> >Bot 2</option>
-					<option value="3" if( <?= $bot == '3' ? 'selected' : '' ?> >Bot 3</option>
+					<option value="alpha" if( <?= $bot == 'alpha' ? 'selected' : '' ?> >Alpha</option>
+					<option value="beta" if( <?= $bot == 'beta' ? 'selected' : '' ?> >Beta</option>
+					<option value="gamma" if( <?= $bot == 'gamma' ? 'selected' : '' ?> >Gamma</option>
 				</select>
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
