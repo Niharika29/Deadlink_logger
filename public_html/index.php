@@ -30,13 +30,13 @@ if ( isset( $_GET['id'] ) ) {
 			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 		}
 		if ( $bot == 'all' ) {
-			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff";
-			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff";
+			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numnotf
 				FROM bot_log WHERE datetime >= $timeDiff
 				GROUP BY CAST( datetime AS DATE )";
 		} else {
-			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '" . $url . "' AND datetime >= $timeDiff AND bot = $bot";
-			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( num_links ) AS totalnum
+			$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff AND bot = $bot";
+			$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS totalnum, SUM( links_not_fixed ) AS numnotf
 				FROM bot_log WHERE datetime >= $timeDiff AND bot = $bot
 				GROUP BY CAST( datetime AS DATE )";
 		}
@@ -48,6 +48,7 @@ if ( isset( $_GET['id'] ) ) {
 			}
 		}
 		$result = mysqli_query( $link, $query );
+		var_dump( $chart, $chartData );
 		if ( $result->num_rows > 0 ) {
 			$html = '<table id="results">';
 			$html .= '<tr>
@@ -68,8 +69,8 @@ if ( isset( $_GET['id'] ) ) {
 							.'<td>'. $row['page_title'] .'</td>'
 							.'<td>'. $row['page_id'] .'</td>'
 							.'<td>'. $row['rev_id'] .'</td>'
-							.'<td>'. $row['links_fixed'] .'</td>'
-							.'<td>'. $row['links_not_fixed'] .'</td>'
+							.'<td>'. $row['numf'] .'</td>'
+							.'<td>'. $row['numnotf'] .'</td>'
 							.'<td>'. $row['service'] .'</td>'
 							.'<td>'. $row['day'] .'</td>'
 						.'</tr>';
@@ -119,9 +120,9 @@ if ( isset( $_GET['id'] ) ) {
 
 				<select name="bot">
 					<option value="all" if( <?= $bot == 'all' ? 'selected' : '' ?> >All bots</option>
-					<option value="alpha" if( <?= $bot == 'alpha' ? 'selected' : '' ?> >Alpha</option>
-					<option value="beta" if( <?= $bot == 'beta' ? 'selected' : '' ?> >Beta</option>
-					<option value="gamma" if( <?= $bot == 'gamma' ? 'selected' : '' ?> >Gamma</option>
+					<option value="Alpha" if( <?= $bot == 'Alpha' ? 'selected' : '' ?> >Alpha</option>
+					<option value="Beta" if( <?= $bot == 'Beta' ? 'selected' : '' ?> >Beta</option>
+					<option value="Gamma" if( <?= $bot == 'Gamma' ? 'selected' : '' ?> >Gamma</option>
 				</select>
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
