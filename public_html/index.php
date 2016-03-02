@@ -132,6 +132,7 @@ if ( isset( $_GET['id'] ) ) {
 			</form>
 		</div>
 		<canvas id="bot-chart" width="50%" height="300"></canvas>
+		<div id="legend"></div>
 		<?=$html?>
 	</body>
 </html>

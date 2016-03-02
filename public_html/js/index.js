@@ -27,9 +27,10 @@ function displayChart( fixed, fvalues, nvalues ) {
 			}
 		]
 	};
-	var options = {
-		legendTemplate : "<ul><li><span style=\"background-color:#b47ec8\"></span>Links fixed</li><li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
-	}
+	// var options = {
+	// 	legendTemplate : "<ul><li><span style=\"background-color:#b47ec8\"></span>Links fixed</li><li><span style=\"background-color:#ef9048\"></span>Links fixed</li></ul>",
+	// }
 	var myLineChart = new Chart( ctx ).Line( data );
+	$( '#legend' ).html( myLineChart.generateLegend() );
 }
 

@@ -12,6 +12,19 @@ canvas {
 	width: 800px;
 }
 
+#legend {
+	padding: 20px;
+	margin: auto;
+	display: block;
+}
+
+#legend li span {
+	display: inline-block;
+	width: 12px;
+	height: 12px;
+	margin-right: 5px;
+}
+
 #form-div {
 	text-align: center;
 	padding-top: 30px;
