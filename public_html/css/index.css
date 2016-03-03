@@ -53,6 +53,7 @@ table {
 	text-align: center;
 	color:#666;
 	font-size:16px;
+	max-width: 80%;
 	text-shadow: 1px 1px 0px #fff;
 	border:#ccc 1px solid;
 	-moz-border-radius:3px;
