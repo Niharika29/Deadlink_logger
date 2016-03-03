@@ -68,11 +68,11 @@ if ( isset( $_GET['id'] ) ) {
 					</tr>';
 			while ( $row = $result->fetch_assoc() ) {
 				$html .= '<tr class="trow">'
-							.'<td>'. $row['wiki'] .'</td>'
+							.'<td><a href="'.$row['wiki'].'">'. $row['wiki'] .'</a></td>'
 							.'<td>'. $row['bot'] .'</td>'
-							.'<td>'. $row['page_title'] .'</td>'
+							.'<td><a href="'.$row['wiki'].'/wiki/'.$row['page_title'].'">'. $row['page_title'] .'</a></td>'
 							.'<td>'. $row['page_id'] .'</td>'
-							.'<td>'. $row['rev_id'] .'</td>'
+							.'<td><a href="'.$row['wiki'].'/wiki/'.$row['page_title'].'&oldid='.$row['rev_id'].'">'. $row['rev_id'] .'</td>'
 							.'<td>'. $row['links_fixed'] .'</td>'
 							.'<td>'. $row['links_not_fixed'] .'</td>'
 							.'<td>'. $row['service'] .'</td>'
