@@ -1,5 +1,5 @@
 // Get context with jQuery - using jQuery's .get() method.
-function displayChart( fixed, fvalues, nvalues ) {
+function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 	// console.log( keys, values );
 	var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
 	var data = {
@@ -29,6 +29,6 @@ function displayChart( fixed, fvalues, nvalues ) {
 	};
 
 	var myLineChart = new Chart( ctx ).Line( data );
-	$( '#legend' ).html( myLineChart.generateLegend() );
+	$( '#legend' ).html( myLineChart.generateLegend() + ' Pages fixed: ' + totalf + ' Pages processed: ' + totalp );
 }
 

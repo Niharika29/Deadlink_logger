@@ -95,7 +95,8 @@ if ( isset( $_GET['id'] ) ) {
 	$( document ).ready( function(){
 		displayChart( <?=json_encode( array_keys( $dataf ) )?>,
 			<?=json_encode( array_values( $dataf ) )?>,
-			<?=json_encode( array_values( $datan ) )?>
+			<?=json_encode( array_values( $datan ) )?>,
+			<?=$totalf?>, <?=$result->num_rows?>
 		);
 	})
 </script>
