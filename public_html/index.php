@@ -1,7 +1,7 @@
 <?php
 
 require_once( 'api.php' );
-require dirname(__FILE__) . '/../config.php';
+require_once dirname(__FILE__) . '/../config.php';
 
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
@@ -12,7 +12,7 @@ $time = 'lweek';
 
 if ( isset( $_GET['bot'] ) ) {
 	$vars = $_GET;
-	addLogRecord( $vars, $link );
+	addLogRecord( $vars, $link, $credentials['password'] );
 } else {
 	// Frontend graph stuff goes here.
 	if ( isset( $_POST['submit'] ) ) {
