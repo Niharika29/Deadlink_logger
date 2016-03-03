@@ -134,7 +134,7 @@ if ( isset( $_GET['id'] ) ) {
 			</form>
 		</div>
 		<canvas id="bot-chart" style="width:900px;height:350px"></canvas>
-		<div id="legend"></div><div id="stats">Total links fixed:<?=$totalf?> Total pages scanned:<?=$result->num_rows?></div>
+		<div id="legend"></div>
 		<?=$html?>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</body>
