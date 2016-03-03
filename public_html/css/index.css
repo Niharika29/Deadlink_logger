@@ -12,7 +12,8 @@ canvas {
 	padding: 5px;
 	margin: auto;
 	display: block;
-	width: 300px;
+	width: 600px;
+	text-align: center;
 }
 
 li {
