@@ -10,7 +10,7 @@ $lang = 'en';
 $wiki = 'wikipedia';
 $time = 'lweek';
 
-if ( isset( $_GET['id'] ) ) {
+if ( isset( $_GET['bot'] ) ) {
 	$vars = $_GET;
 	addLogRecord( $vars, $link );
 } else {
