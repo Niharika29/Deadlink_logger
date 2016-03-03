@@ -21,6 +21,7 @@ if ( isset( $_GET['id'] ) ) {
 		$wiki = $_POST['wiki'];
 		$bot = $_POST['bot'];
 
+		// Compose url from drop-downs
 		$url = $lang . '.' . $wiki . '.' . 'org';
 		if ( $time == 'lweek' ) {
 			$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 7 DAY)';
@@ -43,10 +44,12 @@ if ( isset( $_GET['id'] ) ) {
 		$chartData = mysqli_query( $link, $chart );
 		$dataf = array();
 		$datan = array();
+		$totalf = 0;
 		if ( $chartData->num_rows > 0 ) {
 			while ( $row = $chartData->fetch_assoc() ) {
 				$dataf[$row['day']] = $row['numf'];
 				$datan[$row['day']] = $row['numn'];
+				$totalf += $row['numf'];
 			}
 		}
 		$result = mysqli_query( $link, $query );
@@ -131,7 +134,7 @@ if ( isset( $_GET['id'] ) ) {
 			</form>
 		</div>
 		<canvas id="bot-chart" style="width:900px;height:350px"></canvas>
-		<div id="legend"></div>
+		<div id="legend"></div><div id="stats">Total links fixed:<?=totalf?> Total pages scanned:<?=?></div>
 		<?=$html?>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</body>

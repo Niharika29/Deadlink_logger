@@ -6,8 +6,8 @@ function addLogRecord( $vars, $link ) {
 	$wiki      = isset( $vars['wiki'] ) ? $vars['wiki'] : '';
 	$pageId    = isset( $vars['page'] ) ? $vars['page'] : '';
 	$revId     = isset( $vars['rev'] ) ? $vars['rev'] : '';
-	$fixed     = isset( $vars['fixed'] ) ? $vars['num'] : '';
-	$notFixed  = isset( $vars['notfixed'] ) ? $vars['num'] : '';
+	$fixed     = isset( $vars['numf'] ) ? $vars['numf'] : '';
+	$notFixed  = isset( $vars['numn'] ) ? $vars['numn'] : '';
 	$bot       = isset( $vars['bot'] ) ? $vars['bot'] : '';
 	$service   = isset( $vars['service'] ) ? $vars['service'] : '';
 	$status    = isset( $vars['status'] ) ? $vars['status'] : '';
