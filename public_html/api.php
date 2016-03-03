@@ -14,6 +14,9 @@ function addLogRecord( $vars, $link ) {
 	$pageTitle = isset( $vars['title'] ) ? $vars['title'] : '';
 	$password  = isset( $vars['pass'] ) ? $vars['pass'] : '';
 
+	echo 'Hi';
+	echo $credentials['host'];
+
 	if ( $credentials['password'] == $password ) {
 		$query = "INSERT INTO bot_log ( wiki, page_id, rev_id, links_fixed, links_not_fixed, bot, service, status, page_title )
 		          VALUES ( '$wiki' , '$pageId' , '$revId' , '$fixed', '$notFixed' , '$bot' , '$service' , '$status', '$pageTitle' )";
