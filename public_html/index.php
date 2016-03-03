@@ -1,7 +1,7 @@
 <?php
 
 require_once( 'api.php' );
-require_once dirname(__FILE__) . '/../config.php';
+require dirname(__FILE__) . '/../config.php';
 
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
