@@ -29,6 +29,6 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 	};
 
 	var myLineChart = new Chart( ctx ).Line( data );
-	$( '#legend' ).html( myLineChart.generateLegend() + '<ul><li>Pages fixed: ' + totalf + '</li><li> Pages processed: ' + totalp + '</li></ul>');
+	$( '#legend' ).html( myLineChart.generateLegend() + '<ul><li>Pages fixed: <span background="#dcdcdc">' + totalf + '</span></li><li> Pages processed: ' + totalp + '</li></ul>');
 }
 
