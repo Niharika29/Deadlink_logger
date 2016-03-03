@@ -16,15 +16,6 @@ canvas {
 	float: left;
 }
 
-#stats {
-	height: 50px;
-	padding: 5px;
-	margin: auto;
-	display: block;
-	width: 300px;
-	float: left;
-}
-
 li {
 	float: left;
 	margin: 5px;
