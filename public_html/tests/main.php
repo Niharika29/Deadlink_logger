@@ -1,36 +1,36 @@
 <?php
 
-require_once( '../api.php' );
-require_once dirname(__FILE__) . '../../config.php';
+require_once dirname(__FILE__) . '/../api.php';
+require_once dirname(__FILE__) . '/../../config.php';
 
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
 $vars = array(
 		'wiki' => 'dummy.wikitest.org',
-		'bot' => 'Dummy'
+		'bot' => 'Dummy',
 		'title' => 'Dummier',
 		'numf' => 4,
 		'numn' => 5,
 		'pass' => $credentials['password']
-	);
+ );
 
 // Add the test record
-addLogRecord( $link, $vars, $credentials['password'] );
+addLogRecord( $vars, $link, $credentials['password'] );
 
 // Query to see it was inserted
 $query = 'SELECT * FROM bot_log WHERE wiki="dummy.wikitest.org"';
 $result = mysqli_query( $link, $query );
 
-echo $credentials['host'];
+assert( $result->num_rows == 1 );
 
 // Validate insertion
 if ( $result->num_rows > 0 ) {
 	$row = $result->fetch_assoc();
 	assert( $row['wiki'] == 'dummy.wikitest.org' );
 	assert( $row['bot'] == 'Dummy' );
-	assert( $row['title'] == 'Dummier' );
-	assert( $row['numf'] == 4 );
-	assert( $row['numn'] == 5 );
+	assert( $row['page_title'] == 'Dummier' );
+	assert( $row['links_fixed'] == 4 );
+	assert( $row['links_not_fixed'] == 5 );
 } else {
 	echo 'Test failed';
 	die();
