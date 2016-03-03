@@ -12,14 +12,17 @@ function addLogRecord( $vars, $link ) {
 	$service   = isset( $vars['service'] ) ? $vars['service'] : '';
 	$status    = isset( $vars['status'] ) ? $vars['status'] : '';
 	$pageTitle = isset( $vars['title'] ) ? $vars['title'] : '';
+	$password  = isset( $vars['pass'] ) ? $vars['pass'] : '';
 
-	$query = "INSERT INTO bot_log ( wiki, page_id, rev_id, links_fixed, links_not_fixed, bot, service, status, page_title )
-	          VALUES ( '$wiki' , '$pageId' , '$revId' , '$fixed', '$notFixed' , '$bot' , '$service' , '$status', '$pageTitle' )";
-
-	$result = mysqli_query( $link, $query );
-
-	if ( $result ) {
-		return json_encode( 'true' );
+	if ( $credentials['password'] == $password ) {
+		$query = "INSERT INTO bot_log ( wiki, page_id, rev_id, links_fixed, links_not_fixed, bot, service, status, page_title )
+		          VALUES ( '$wiki' , '$pageId' , '$revId' , '$fixed', '$notFixed' , '$bot' , '$service' , '$status', '$pageTitle' )";
+		$result = mysqli_query( $link, $query );
+		if ( $result ) {
+			return json_encode( 'true' );
+		} else {
+			return json_encode( 'false' );
+		}
 	} else {
 		return json_encode( 'false' );
 	}
