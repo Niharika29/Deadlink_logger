@@ -3,6 +3,10 @@
 require_once dirname(__FILE__) . '/../config.php';
 
 function addLogRecord( $vars, $link, $pass ) {
+	foreach( $vars as $key => $value ) {
+		$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
+	}
+
 	$wiki      = isset( $vars['wiki'] ) ? $vars['wiki'] : '';
 	$pageId    = isset( $vars['page'] ) ? $vars['page'] : '';
 	$revId     = isset( $vars['rev'] ) ? $vars['rev'] : '';
