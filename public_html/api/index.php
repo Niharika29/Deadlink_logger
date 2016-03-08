@@ -34,4 +34,5 @@ require_once dirname(__FILE__) . '/../../config.php';
 		return json_encode( 'false' );
 	}
 
-echo 'Works!';
+//
+?>
