@@ -26,12 +26,12 @@ require_once dirname(__FILE__) . '/../../config.php';
 		          VALUES ( '$wiki' , '$pageId' , '$revId' , '$fixed', '$notFixed' , '$bot' , '$service' , '$status', '$pageTitle' )";
 		$result = mysqli_query( $link, $query );
 		if ( $result ) {
-			return json_encode( 'true' );
+			echo json_encode( 'true' );
 		} else {
-			return json_encode( 'false' );
+			echo json_encode( 'false' );
 		}
 	} else {
-		return json_encode( 'false' );
+		echo json_encode( 'false' );
 	}
 
 //
