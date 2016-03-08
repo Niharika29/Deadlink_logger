@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . '/../../config.php';
 // function addLogRecord() {
 	$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 	$vars = $_GET;
-	var_dump( $vars );
+	var_dump( $credentials );
 	foreach( $vars as $key => $value ) {
 		$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
 	}
