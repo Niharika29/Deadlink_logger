@@ -30,6 +30,7 @@ require_once dirname(__FILE__) . '/../../config.php';
 			echo json_encode( 'false' );
 		}
 	} else {
+		echo 'WTF?';
 		echo json_encode( 'false' );
 	}
 
