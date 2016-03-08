@@ -20,7 +20,7 @@ require_once dirname(__FILE__) . '/../../config.php';
 	$pageTitle = isset( $vars['title'] ) ? $vars['title'] : '';
 	$password  = isset( $vars['pass'] ) ? $vars['pass'] : '';
 
-	if ( $pass == $password ) {
+	if ( $credentials['password'] == $password ) {
 		$query = "INSERT INTO bot_log ( wiki, page_id, rev_id, links_fixed, links_not_fixed, bot, service, status, page_title )
 		          VALUES ( '$wiki' , '$pageId' , '$revId' , '$fixed', '$notFixed' , '$bot' , '$service' , '$status', '$pageTitle' )";
 		$result = mysqli_query( $link, $query );
@@ -30,7 +30,6 @@ require_once dirname(__FILE__) . '/../../config.php';
 			echo json_encode( 'false' );
 		}
 	} else {
-		echo 'WTF?';
 		echo json_encode( 'false' );
 	}
 
