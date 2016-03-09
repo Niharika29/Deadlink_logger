@@ -111,3 +111,8 @@ table tr:hover td {
 	background-color: white;
 	color: #4CAF50;
 }
+
+#footer {
+	margin: 10px auto;
+	text-align: center;
+}
