@@ -17,7 +17,7 @@ if ( isset( $_POST['submit'] ) ) {
 	$bot = $_POST['bot'];
 
 	// Compose url from drop-downs
-	$url = $lang . '.' . $wiki . '.' . 'org';
+	$url = mysqli_real_escape_string( $link, $lang . '.' . $wiki . '.' . 'org' );
 	if ( $time == 'lweek' ) {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 7 DAY)';
 	} else if ( $time == 'lmonth' ) {
@@ -26,16 +26,16 @@ if ( isset( $_POST['submit'] ) ) {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 	}
 	if ( $bot == 'all' ) {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '".$url."'
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
 				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '".$url."'
+				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $url ."'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 	} else {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '".$url."' AND datetime >= $timeDiff
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."' AND datetime >= $timeDiff
 				AND bot = '$bot' ORDER BY datetime DESC LIMIT 100";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '".$url."'
+				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '". $url ."'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 	}
 	$chartData = mysqli_query( $link, $chart );
@@ -64,8 +64,11 @@ if ( isset( $_POST['submit'] ) ) {
 					<th>Date</th>
 				</tr>';
 		while ( $row = $result->fetch_assoc() ) {
+			foreach ( $row as $key => $value) {
+				$row[$key] = htmlspecialchars( $value );
+			}
 			$html .= '<tr class="trow">'
-						.'<td><a href="https://'.$row['wiki'].'">'. $row['wiki'] .'</a></td>'
+						.'<td><a href="https://'. $row['wiki'].'">'. $row['wiki'] .'</a></td>'
 						.'<td>'. $row['bot'] .'</td>'
 						.'<td><a href="https://'.$row['wiki'].'/wiki/'.$row['page_title'].'">'. $row['page_title'] .'</a></td>'
 						.'<td>'. $row['page_id'] .'</td>'
