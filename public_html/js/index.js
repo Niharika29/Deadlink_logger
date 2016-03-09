@@ -30,5 +30,6 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 
 	var myLineChart = new Chart( ctx ).Line( data );
 	$( '#legend' ).html( myLineChart.generateLegend() + '<ul><li>Total links fixed: <b>' + totalf + '</b></li><li> Total pages processed: <b>' + totalp + '</b></li></ul>');
+	$( '#footer' ).html( 'Table truncated to 100 most recent records.' );
 }
 

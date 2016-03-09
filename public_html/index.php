@@ -133,7 +133,7 @@ if ( isset( $_POST['submit'] ) ) {
 		<canvas id="bot-chart" style="width:900px;height:350px"></canvas>
 		<div id="legend"></div>
 		<?=$html?>
-		<div id="footer">Table truncated to the 100 most recent records.</div>
+		<div id="footer"></div>
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 	</body>
 </html>
