@@ -14,10 +14,10 @@ if ( $query == 'true' && $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	echo $wiki, $page_id, $credentials['user'];
-	$query = "SELECT * FROM bot_log WHERE wiki = $wiki AND page_id = $page_id LIMIT 1";
+	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND page_id = $page_id LIMIT 1";
 	echo '-------', $query;
 	$result = mysqli_query( $link, $query );
-	if ( $result ) {
+	if ( $result->num_rows > 0 ) {
 		$data = array();
 		$row = $result->fetch_assoc();
 		var_dump( $row );
