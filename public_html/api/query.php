@@ -10,7 +10,7 @@ foreach( $vars as $key => $value ) {
 
 $query = $vars['query'];
 
-if ( $query == 'true' && isset( $vars['wiki'] && isset( $vars['id'] ) ) ) {
+if ( $query == 'true' && $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	echo $wiki, $page_id;
