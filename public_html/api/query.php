@@ -7,6 +7,7 @@ foreach( $vars as $key => $value ) {
 	$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
 }
 
+var_dump( $vars );
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
 if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
