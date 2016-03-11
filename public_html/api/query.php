@@ -2,11 +2,9 @@
 
 require_once dirname(__FILE__) . '/../../config.php';
 
-$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
-
 $vars = $_GET;
 foreach( $vars as $key => $value ) {
-	$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
+	$vars[$key] = trim( mysqli_real_escape_string( $value ) );
 }
 
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
@@ -29,6 +27,7 @@ if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 }
 
 function generateResult( $query ) {
+	$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 	$result = mysqli_query( $link, $query );
 	var_dump( $result );
 	if ( $result->num_rows > 0 ) {
