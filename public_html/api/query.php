@@ -9,8 +9,6 @@ foreach( $vars as $key => $value ) {
 	$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
 }
 
-var_dump( $vars );
-
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
 if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
@@ -32,7 +30,6 @@ if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 
 function generateResult( $query, $link ) {
 	$result = mysqli_query( $link, $query );
-	var_dump( $query );
 	if ( $result->num_rows > 0 ) {
 		$row = $result->fetch_assoc();
 		echo json_encode( $row );
