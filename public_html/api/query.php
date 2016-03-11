@@ -18,13 +18,8 @@ if ( $query == 'true' && $vars['wiki'] !== null && $vars['id'] !== null ) {
 	echo '-------', $query;
 	$result = mysqli_query( $link, $query );
 	if ( $result->num_rows > 0 ) {
-		$data = array();
 		$row = $result->fetch_assoc();
-		var_dump( $row );
-		foreach ( $row as $key => $value ) {
-			$data[$key] = $value;
-		}
-		var_dump( $data );
+		echo json_encode( $row );
 	} else {
 		echo json_encode( 'false' );
 	}
