@@ -30,7 +30,7 @@ if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 
 function generateResult( $query ) {
 	$result = mysqli_query( $link, $query );
-	var_dump( $query );
+	var_dump( $result );
 	if ( $result->num_rows > 0 ) {
 		$row = $result->fetch_assoc();
 		echo json_encode( $row );
