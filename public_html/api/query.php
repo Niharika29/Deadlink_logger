@@ -6,7 +6,7 @@ $vars = $_GET;
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
 foreach( $vars as $key => $value ) {
-	$vars[$key] = trim( mysqli_real_escape_string( $value ) );
+	$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
 }
 
 var_dump( $vars );
