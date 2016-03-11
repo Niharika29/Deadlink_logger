@@ -12,21 +12,21 @@ if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND page_id = $page_id LIMIT 1";
-	generateResult( $query );
+	generateResult( $query, $credentials );
 // Case 2: wiki and bot given - check which page last parsed by bot on that wiki
 } elseif ( $vars['wiki'] !== null && $vars['bot'] !== null ) {
 	$wiki = $vars['wiki'];
 	$bot = $vars['bot'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND bot = '$bot' LIMIT 1";
-	generateResult( $query );
+	generateResult( $query, $credentials );
 // Case 3: bot given - check which page last edited on which wiki and when by the bot
 } elseif ( $vars['bot'] !== null ) {
 	$bot = $vars['bot'];
 	$query = "SELECT * FROM bot_log WHERE bot = '$bot' LIMIT 1";
-	generateResult( $query );
+	generateResult( $query, $credentials );
 }
 
-function generateResult( $query ) {
+function generateResult( $query, $credentials ) {
 	$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 	$result = mysqli_query( $link, $query );
 	var_dump( $credentials['host'] );
