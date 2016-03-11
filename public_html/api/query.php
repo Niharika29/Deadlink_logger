@@ -12,6 +12,7 @@ if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND page_id = $page_id LIMIT 1";
+	var_dump( $query );
 	generateResult( $query );
 // Case 2: wiki and bot given - check which page last parsed by bot on that wiki
 } elseif ( $vars['wiki'] !== null && $vars['bot'] !== null ) {
