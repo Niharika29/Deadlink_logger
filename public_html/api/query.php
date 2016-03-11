@@ -29,6 +29,7 @@ if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 function generateResult( $query ) {
 	$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 	$result = mysqli_query( $link, $query );
+	var_dump( $query );
 	if ( $result->num_rows > 0 ) {
 		$row = $result->fetch_assoc();
 		echo json_encode( $row );
