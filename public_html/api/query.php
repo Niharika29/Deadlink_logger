@@ -2,19 +2,18 @@
 
 require_once dirname(__FILE__) . '/../../config.php';
 
+$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
+
 $vars = $_GET;
 foreach( $vars as $key => $value ) {
 	$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
 }
-
-var_dump( $_GET );
 
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
 if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND page_id = $page_id LIMIT 1";
-	var_dump( $query );
 	generateResult( $query );
 // Case 2: wiki and bot given - check which page last parsed by bot on that wiki
 } elseif ( $vars['wiki'] !== null && $vars['bot'] !== null ) {
@@ -30,7 +29,6 @@ if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 }
 
 function generateResult( $query ) {
-	$link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 	$result = mysqli_query( $link, $query );
 	var_dump( $query );
 	if ( $result->num_rows > 0 ) {
