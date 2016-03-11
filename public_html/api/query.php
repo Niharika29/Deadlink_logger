@@ -3,11 +3,12 @@
 require_once dirname(__FILE__) . '/../../config.php';
 
 $vars = $_GET;
-foreach( $vars as $key => $value ) {
-	$vars[$key] = trim( mysqli_real_escape_string( $value ) );
-}
+// foreach( $vars as $key => $value ) {
+// 	$vars[$key] = trim( mysqli_real_escape_string( $value ) );
+// }
 
 echo $vars;
+
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
 if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
