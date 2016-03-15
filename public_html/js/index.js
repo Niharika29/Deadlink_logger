@@ -25,17 +25,14 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 				pointHighlightStroke: "#b75810",
 				data: nvalues
 			}
-		],
-		labelsFilter: function labelsFilter(value, index, labels) {
-			if (labels.length >= 40) {
-				return (index + 1) % Math.ceil(labels.length / 40 * 2) !== 0;
-			} else {
-				return false;
-			}
-		}
+		]
 	};
 
-	var myLineChart = new Chart( ctx ).Line( data );
+	var myLineChart = new Chart( ctx ).Line( data, {
+		labelsFilter: function labelsFilter( value, index, labels ) {
+			return (index + 1) % 5 !== 0;
+		}
+	} );
 	$( '#legend' ).html( myLineChart.generateLegend() + '<ul><li>Total links fixed: <b>' + totalf + '</b></li><li> Total pages processed: <b>' + totalp + '</b></li></ul>');
 	var count = $('#results tr').length;
 	if ( count >= 100 ) {
