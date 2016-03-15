@@ -13,7 +13,7 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "#b47ec8",
-				data: fvalues
+				data: fvalues,
 			},
 			{
 				label: "Links not fixed",
@@ -25,7 +25,14 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 				pointHighlightStroke: "#b75810",
 				data: nvalues
 			}
-		]
+		],
+		labelsFilter: function labelsFilter(value, index, labels) {
+			if (labels.length >= 60) {
+				return (index + 1) % Math.ceil(labels.length / 60 * 2) !== 0;
+			} else {
+				return false;
+			}
+		}
 	};
 
 	var myLineChart = new Chart( ctx ).Line( data );

@@ -87,7 +87,7 @@ if ( isset( $_POST['submit'] ) ) {
 <html>
 	<head>
 		<title>IA bot logs</title>
-<script src="//tools-static.wmflabs.org/cdnjs/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+<script src="../vendor/Chart.min.js"></script>
 <script src="//tools-static.wmflabs.org/cdnjs/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 <script src="js/index.js" type="text/javascript"></script>
 <script type="text/javascript">
