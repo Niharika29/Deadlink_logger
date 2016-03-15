@@ -30,6 +30,7 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 
 	var myLineChart = new Chart( ctx ).Line( data, {
 		labelsFilter: function labelsFilter( value, index, labels ) {
+			console.log(labels.length);
 			return (index + 1) % 5 !== 0;
 		}
 	} );
