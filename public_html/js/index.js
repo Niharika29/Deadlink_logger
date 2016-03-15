@@ -30,8 +30,8 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 
 	var myLineChart = new Chart( ctx ).Line( data, {
 		labelsFilter: function labelsFilter( value, index, labels ) {
-			if ( labels.length >= 40 ) {
-				return ( index + 1 ) % Math.ceil( labels.length / 40 ) !== 0;
+			if ( labels.length >= 60 ) {
+				return ( index + 1 ) % Math.ceil( labels.length / 60 ) !== 0;
 			} else {
 				return false;
 			}
