@@ -30,8 +30,11 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 
 	var myLineChart = new Chart( ctx ).Line( data, {
 		labelsFilter: function labelsFilter( value, index, labels ) {
-			console.log(labels.length);
-			return (index + 1) % 5 !== 0;
+			if ( labels.length >= 30 ) {
+				return ( index + 1 ) % Math.ceil( labels.length / 50 * 2 ) !== 0;
+			} else {
+				return false;
+			}
 		}
 	} );
 	$( '#legend' ).html( myLineChart.generateLegend() + '<ul><li>Total links fixed: <b>' + totalf + '</b></li><li> Total pages processed: <b>' + totalp + '</b></li></ul>');
