@@ -96,7 +96,7 @@ if ( isset( $_POST['submit'] ) ) {
 		displayChart( <?=json_encode( array_keys( $dataf ) )?>,
 			<?=json_encode( array_values( $dataf ) )?>,
 			<?=json_encode( array_values( $datan ) )?>,
-			<?=$totalf?>, <?=$result->num_rows?>
+			<?=$totalf?>, <?=$result ? $result->num_rows : null ?>
 		);
 	})
 </script>
