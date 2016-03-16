@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Output API for deadlink logger. Supported params:
+ * 'wiki': Wiki URL. Example: fr.wikipedia.org
+ * 'pageid': ID of the page we want to query for
+ * 'bot': Bot name whose last activity we want to look into
+ */
+
 require_once dirname(__FILE__) . '/../../config.php';
 
 $vars = $_GET;
@@ -10,7 +17,7 @@ foreach( $vars as $key => $value ) {
 }
 
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
-if ( isset( $vars['wiki'] ) && isset( $vars['id'] ) ) {
+if ( isset( $vars['wiki'] ) && isset( $vars['pageid'] ) ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND page_id = $page_id LIMIT 1";
@@ -26,6 +33,9 @@ if ( isset( $vars['wiki'] ) && isset( $vars['id'] ) ) {
 	$bot = $vars['bot'];
 	$query = "SELECT * FROM bot_log WHERE bot = '$bot' LIMIT 1";
 	generateResult( $query, $link );
+// Bad request
+} else {
+	echo json_encode( 'Invalid paramters' );
 }
 
 function generateResult( $query, $link ) {
