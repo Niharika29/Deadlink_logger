@@ -10,7 +10,7 @@ foreach( $vars as $key => $value ) {
 }
 
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
-if ( $vars['wiki'] !== null && $vars['id'] !== null ) {
+if ( isset( $vars['wiki'] ) && $vars['id'] !== null ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND page_id = $page_id LIMIT 1";
