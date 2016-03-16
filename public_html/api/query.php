@@ -10,19 +10,19 @@ foreach( $vars as $key => $value ) {
 }
 
 // Case 1: wiki and page id given - get details about when last parsed and by which bot etc.
-if ( isset( $vars['wiki'] ) && $vars['id'] !== null ) {
+if ( isset( $vars['wiki'] ) && isset( $vars['id'] ) ) {
 	$wiki = $vars['wiki'];
 	$page_id = $vars['id'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND page_id = $page_id LIMIT 1";
 	generateResult( $query, $link );
 // Case 2: wiki and bot given - check which page last parsed by bot on that wiki
-} elseif ( $vars['wiki'] !== null && $vars['bot'] !== null ) {
+} elseif ( isset( $vars['wiki'] ) && isset( $vars['bot'] ) ) {
 	$wiki = $vars['wiki'];
 	$bot = $vars['bot'];
 	$query = "SELECT * FROM bot_log WHERE wiki = '$wiki' AND bot = '$bot' LIMIT 1";
 	generateResult( $query, $link );
 // Case 3: bot given - check which page last edited on which wiki and when by the bot
-} elseif ( $vars['bot'] !== null ) {
+} elseif ( isset( $vars['bot'] ) ) {
 	$bot = $vars['bot'];
 	$query = "SELECT * FROM bot_log WHERE bot = '$bot' LIMIT 1";
 	generateResult( $query, $link );
