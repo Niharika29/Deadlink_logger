@@ -12,6 +12,7 @@ $html = '';
 $dataf = array();
 $datan = array();
 $result = null;
+$totalf = 0;
 
 // Frontend graph stuff goes here.
 if ( isset( $_POST['submit'] ) ) {
