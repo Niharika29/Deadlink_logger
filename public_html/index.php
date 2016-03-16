@@ -13,8 +13,12 @@ $dataf = array();
 $datan = array();
 $result = array();
 $totalf = 0;
+$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
+			AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
+$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
+			FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $url ."'
+			GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 
-// Frontend graph stuff goes here.
 if ( isset( $_POST['submit'] ) ) {
 	$time = $_POST['time'];
 	$lang = $_POST['lang'];
@@ -30,11 +34,6 @@ if ( isset( $_POST['submit'] ) ) {
 	} else {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 	}
-	$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
-				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
-		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $url ."'
-				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 	if ( $bot == 'all' ) {
 		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
 				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
@@ -48,6 +47,7 @@ if ( isset( $_POST['submit'] ) ) {
 				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '". $url ."'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 	}
+}
 	$chartData = mysqli_query( $link, $chart );
 	$dataf = array();
 	$datan = array();
@@ -90,7 +90,6 @@ if ( isset( $_POST['submit'] ) ) {
 					.'</tr>';
 		}
 		$html .= '</table>';
-	}
 }
 
 ?>
