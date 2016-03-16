@@ -13,6 +13,7 @@ $dataf = array();
 $datan = array();
 $result = array();
 $totalf = 0;
+// Default query
 $query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = 'en.wikipedia.org'
 			AND datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) ORDER BY datetime DESC LIMIT 100";
 $chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
@@ -48,46 +49,45 @@ if ( isset( $_POST['submit'] ) ) {
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 	}
 }
-	$chartData = mysqli_query( $link, $chart );
-
-	if ( $chartData->num_rows > 0 ) {
-		while ( $row = $chartData->fetch_assoc() ) {
-			$dataf[$row['day']] = $row['numf'];
-			$datan[$row['day']] = $row['numn'];
-			$totalf += $row['numf'];
-		}
+$chartData = mysqli_query( $link, $chart );
+if ( $chartData->num_rows > 0 ) {
+	while ( $row = $chartData->fetch_assoc() ) {
+		$dataf[$row['day']] = $row['numf'];
+		$datan[$row['day']] = $row['numn'];
+		$totalf += $row['numf'];
 	}
-	$result = mysqli_query( $link, $query );
-	if ( $result->num_rows > 0 ) {
-		$html .= '<table id="results">';
-		$html .= '<tr>
-					<th>Wiki</th>
-					<th>Bot</th>
-					<th>Page title</th>
-					<th>Page ID</th>
-					<th>Revision ID</th>
-					<th>Links fixed</th>
-					<th>Links not fixed</th>
-					<th>Service used</th>
-					<th>Date</th>
-				</tr>';
-		while ( $row = $result->fetch_assoc() ) {
-			foreach ( $row as $key => $value) {
-				$row[$key] = htmlspecialchars( $value );
-			}
-			$html .= '<tr class="trow">'
-						.'<td><a href="https://'. $row['wiki'].'">'. $row['wiki'] .'</a></td>'
-						.'<td>'. $row['bot'] .'</td>'
-						.'<td><a href="https://'.$row['wiki'].'/wiki/'.$row['page_title'].'">'. $row['page_title'] .'</a></td>'
-						.'<td>'. $row['page_id'] .'</td>'
-						.'<td><a href="https://'.$row['wiki'].'/wiki/'.$row['page_title'].'?diff=prev&oldid='.$row['rev_id'].'">'. $row['rev_id'] .'</td>'
-						.'<td>'. $row['links_fixed'] .'</td>'
-						.'<td>'. $row['links_not_fixed'] .'</td>'
-						.'<td>'. $row['service'] .'</td>'
-						.'<td>'. $row['day'] .'</td>'
-					.'</tr>';
+}
+$result = mysqli_query( $link, $query );
+if ( $result->num_rows > 0 ) {
+	$html .= '<table id="results">';
+	$html .= '<tr>
+				<th>Wiki</th>
+				<th>Bot</th>
+				<th>Page title</th>
+				<th>Page ID</th>
+				<th>Revision ID</th>
+				<th>Links fixed</th>
+				<th>Links not fixed</th>
+				<th>Service used</th>
+				<th>Date</th>
+			</tr>';
+	while ( $row = $result->fetch_assoc() ) {
+		foreach ( $row as $key => $value) {
+			$row[$key] = htmlspecialchars( $value );
 		}
-		$html .= '</table>';
+		$html .= '<tr class="trow">'
+					.'<td><a href="https://'. $row['wiki'].'">'. $row['wiki'] .'</a></td>'
+					.'<td>'. $row['bot'] .'</td>'
+					.'<td><a href="https://'.$row['wiki'].'/wiki/'.$row['page_title'].'">'. $row['page_title'] .'</a></td>'
+					.'<td>'. $row['page_id'] .'</td>'
+					.'<td><a href="https://'.$row['wiki'].'/wiki/'.$row['page_title'].'?diff=prev&oldid='.$row['rev_id'].'">'. $row['rev_id'] .'</td>'
+					.'<td>'. $row['links_fixed'] .'</td>'
+					.'<td>'. $row['links_not_fixed'] .'</td>'
+					.'<td>'. $row['service'] .'</td>'
+					.'<td>'. $row['day'] .'</td>'
+				.'</tr>';
+	}
+	$html .= '</table>';
 }
 
 ?>
