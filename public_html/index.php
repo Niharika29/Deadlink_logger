@@ -11,7 +11,7 @@ $time = 'lweek';
 $html = '';
 $dataf = array();
 $datan = array();
-$result = null;
+$result = array();
 $totalf = 0;
 
 // Frontend graph stuff goes here.
@@ -105,7 +105,7 @@ if ( isset( $_POST['submit'] ) ) {
 		displayChart( <?=json_encode( array_keys( $dataf ) )?>,
 			<?=json_encode( array_values( $dataf ) )?>,
 			<?=json_encode( array_values( $datan ) )?>,
-			<?=$totalf?>, <?=$result->num_rows > 0 ? $result->num_rows : null ?>
+			<?=$totalf?>, <?=$result->num_rows ? $result->num_rows : 0 ?>
 		);
 	})
 </script>
