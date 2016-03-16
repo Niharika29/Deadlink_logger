@@ -8,6 +8,10 @@ $bot = 'all';
 $lang = 'en';
 $wiki = 'wikipedia';
 $time = 'lweek';
+$html = '';
+$dataf = array();
+$datan = array();
+$result = null;
 
 // Frontend graph stuff goes here.
 if ( isset( $_POST['submit'] ) ) {
@@ -55,7 +59,6 @@ if ( isset( $_POST['submit'] ) ) {
 		}
 	}
 	$result = mysqli_query( $link, $query );
-	$html = '';
 	if ( $result->num_rows > 0 ) {
 		$html .= '<table id="results">';
 		$html .= '<tr>
