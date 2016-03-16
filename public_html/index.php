@@ -13,10 +13,10 @@ $dataf = array();
 $datan = array();
 $result = array();
 $totalf = 0;
-$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
-			AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
+$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = 'en.wikipedia.org'
+			AND datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) ORDER BY datetime DESC LIMIT 100";
 $chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-			FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $url ."'
+			FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND wiki = 'en.wikipedia.org'
 			GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 
 if ( isset( $_POST['submit'] ) ) {
@@ -49,9 +49,7 @@ if ( isset( $_POST['submit'] ) ) {
 	}
 }
 	$chartData = mysqli_query( $link, $chart );
-	$dataf = array();
-	$datan = array();
-	$totalf = 0;
+
 	if ( $chartData->num_rows > 0 ) {
 		while ( $row = $chartData->fetch_assoc() ) {
 			$dataf[$row['day']] = $row['numf'];
