@@ -25,6 +25,11 @@ if ( isset( $_POST['submit'] ) ) {
 	} else {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 	}
+	$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
+				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
+		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
+				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $url ."'
+				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 	if ( $bot == 'all' ) {
 		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
 				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
@@ -96,7 +101,7 @@ if ( isset( $_POST['submit'] ) ) {
 		displayChart( <?=json_encode( array_keys( $dataf ) )?>,
 			<?=json_encode( array_values( $dataf ) )?>,
 			<?=json_encode( array_values( $datan ) )?>,
-			<?=$totalf?>, <?=$result ? $result->num_rows : null ?>
+			<?=$totalf?>, <?=$result->num_rows > 0 ? $result->num_rows : null ?>
 		);
 	})
 </script>
