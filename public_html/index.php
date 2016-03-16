@@ -50,8 +50,9 @@ if ( isset( $_POST['submit'] ) ) {
 		}
 	}
 	$result = mysqli_query( $link, $query );
+	$html = '';
 	if ( $result->num_rows > 0 ) {
-		$html = '<table id="results">';
+		$html .= '<table id="results">';
 		$html .= '<tr>
 					<th>Wiki</th>
 					<th>Bot</th>
