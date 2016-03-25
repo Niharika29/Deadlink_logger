@@ -1,6 +1,9 @@
 // Get context with jQuery - using jQuery's .get() method.
 function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 	// console.log( keys, values );
+	if ( totalp <= 0 ) {
+		return;
+	}
 	var ctx = $( '#bot-chart' ).get( 0 ).getContext( '2d' );
 	var data = {
 		labels: fixed,
@@ -13,7 +16,7 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 				pointStrokeColor: "#fff",
 				pointHighlightFill: "#fff",
 				pointHighlightStroke: "#b47ec8",
-				data: fvalues
+				data: fvalues,
 			},
 			{
 				label: "Links not fixed",
@@ -28,7 +31,20 @@ function displayChart( fixed, fvalues, nvalues, totalf, totalp ) {
 		]
 	};
 
-	var myLineChart = new Chart( ctx ).Line( data );
+	var myLineChart = new Chart( ctx ).Line( data, {
+		labelsFilter: function labelsFilter( value, index, labels ) {
+			if ( labels.length >= 60 ) {
+				return ( index + 1 ) % Math.ceil( labels.length / 60 ) !== 0;
+			} else {
+				return false;
+			}
+		},
+		pointHitDetectionRadius: 3
+	} );
 	$( '#legend' ).html( myLineChart.generateLegend() + '<ul><li>Total links fixed: <b>' + totalf + '</b></li><li> Total pages processed: <b>' + totalp + '</b></li></ul>');
+	var count = $('#results tr').length;
+	if ( count >= 100 ) {
+		$( '#footer' ).html( 'Table truncated to 100 most recent records.' );
+	}
 }
 
