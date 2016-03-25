@@ -9,10 +9,12 @@ $lang = 'en';
 $wiki = 'wikipedia';
 $time = 'lweek';
 $html = '';
-$dataf = array();
-$datan = array();
+$dataf = array(); // Links fixed
+$datan = array(); // Links not fixed
 $result = array();
 $totalf = 0;
+$botNames = array();
+
 // Default query
 $query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = 'en.wikipedia.org'
 			AND datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) ORDER BY datetime DESC LIMIT 100";
@@ -75,6 +77,10 @@ if ( $result->num_rows > 0 ) {
 		foreach ( $row as $key => $value) {
 			$row[$key] = htmlspecialchars( $value );
 		}
+		// Collect all the bot names
+		if ( !in_array( $row['bot'], $botNames ) ) {
+			$botNames[] = $row['bot'];
+		}
 		$html .= '<tr class="trow">'
 					.'<td><a href="https://'. $row['wiki'].'">'. $row['wiki'] .'</a></td>'
 					.'<td>'. $row['bot'] .'</td>'
@@ -133,9 +139,16 @@ if ( $result->num_rows > 0 ) {
 
 				<select name="bot">
 					<option value="all" if( <?= $bot == 'all' ? 'selected' : '' ?> >All bots</option>
-					<option value="Alpha" if( <?= $bot == 'Alpha' ? 'selected' : '' ?> >Alpha</option>
-					<option value="Beta" if( <?= $bot == 'Beta' ? 'selected' : '' ?> >Beta</option>
-					<option value="Gamma" if( <?= $bot == 'Gamma' ? 'selected' : '' ?> >Gamma</option>
+					<?php
+						sort( $botNames );
+						foreach ( $botNames as $botName) {
+							echo "<option value=\"$botName\"";
+							if ( $bot == $botName ) {
+								echo ' selected';
+							}
+							echo ">$botName</option>";
+						}
+					?>
 				</select>
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
