@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . '/../../config.php';
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 $vars = $_GET;
 foreach( $vars as $key => $value ) {
-	$vars[$key] = trim( mysqli_real_escape_string( $link, $value ) );
+	$vars[$key] = mb_convert_encoding( trim( mysqli_real_escape_string( $link, $value ) ), 'HTML-ENTITIES', 'UTF-8' );
 }
 
 $wiki      = isset( $vars['wiki'] ) ? $vars['wiki'] : '';
