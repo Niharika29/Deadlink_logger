@@ -51,6 +51,15 @@ if ( isset( $_POST['submit'] ) ) {
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 	}
 }
+// Get all the bot names
+$botQuery = "SELECT DISTINCT bot FROM bot_log ORDER BY bot DESC LIMIT 50";
+$botData = mysqli_query( $link, $botQuery );
+if ( $botData->num_rows > 0 ) {
+	while ( $row = $botData->fetch_assoc() ) {
+		$botNames[] = $row['bot'];
+	}
+}
+
 $chartData = mysqli_query( $link, $chart );
 if ( $chartData->num_rows > 0 ) {
 	while ( $row = $chartData->fetch_assoc() ) {
@@ -76,10 +85,6 @@ if ( $result->num_rows > 0 ) {
 	while ( $row = $result->fetch_assoc() ) {
 		foreach ( $row as $key => $value) {
 			$row[$key] = htmlspecialchars( $value );
-		}
-		// Collect all the bot names
-		if ( !in_array( $row['bot'], $botNames ) ) {
-			$botNames[] = $row['bot'];
 		}
 		$html .= '<tr class="trow">'
 					.'<td><a href="https://'. $row['wiki'].'">'. $row['wiki'] .'</a></td>'
@@ -140,7 +145,6 @@ if ( $result->num_rows > 0 ) {
 				<select name="bot">
 					<option value="all" if( <?= $bot == 'all' ? 'selected' : '' ?> >All bots</option>
 					<?php
-						sort( $botNames );
 						foreach ( $botNames as $botName) {
 							echo "<option value=\"$botName\"";
 							if ( $bot == $botName ) {
