@@ -21,6 +21,7 @@ $query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = 'e
 $chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 			FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND wiki = 'en.wikipedia.org'
 			GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
 
 if ( isset( $_POST['submit'] ) ) {
 	$time = $_POST['time'];
@@ -43,12 +44,14 @@ if ( isset( $_POST['submit'] ) ) {
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $url ."'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff";
 	} else {
 		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."' AND datetime >= $timeDiff
 				AND bot = '$bot' ORDER BY datetime DESC LIMIT 100";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '". $url ."'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot'";
 	}
 }
 // Get all the bot names
@@ -59,6 +62,8 @@ if ( $botData->num_rows > 0 ) {
 		$botNames[] = $row['bot'];
 	}
 }
+
+$pagesProcessed = mysqli_query( $link, $pagesQuery );
 
 $chartData = mysqli_query( $link, $chart );
 if ( $chartData->num_rows > 0 ) {
@@ -113,7 +118,7 @@ if ( $result->num_rows > 0 ) {
 		displayChart( <?=json_encode( array_keys( $dataf ) )?>,
 			<?=json_encode( array_values( $dataf ) )?>,
 			<?=json_encode( array_values( $datan ) )?>,
-			<?=$totalf?>, <?=$result->num_rows ? $result->num_rows : 0 ?>
+			<?=$totalf?>, <?=$pagesProcessed->num_rows ? $pagesProcessed->num_rows : 0 ?>
 		);
 	})
 </script>
