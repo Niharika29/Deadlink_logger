@@ -88,9 +88,9 @@ if ( $result->num_rows > 0 ) {
 				<th>Date</th>
 			</tr>';
 	while ( $row = $result->fetch_assoc() ) {
-		foreach ( $row as $key => $value) {
-			$row[$key] = htmlspecialchars( $value );
-		}
+		// foreach ( $row as $key => $value) {
+		// 	$row[$key] = htmlspecialchars_decode( $value );
+		// }
 		$html .= '<tr class="trow">'
 					.'<td><a href="https://'. $row['wiki'].'">'. $row['wiki'] .'</a></td>'
 					.'<td>'. $row['bot'] .'</td>'

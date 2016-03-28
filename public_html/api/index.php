@@ -6,6 +6,7 @@ $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials
 $vars = $_GET;
 foreach( $vars as $key => $value ) {
 	$vars[$key] = mb_convert_encoding( trim( mysqli_real_escape_string( $link, $value ) ), 'HTML-ENTITIES', 'UTF-8' );
+	$vars[$key] = htmlspecialchars_decode( $vars[$key] );
 }
 
 $wiki      = isset( $vars['wiki'] ) ? $vars['wiki'] : '';
