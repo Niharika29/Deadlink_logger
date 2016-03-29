@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS bot_log (
 	links_not_fixed		INT(11) UNSIGNED DEFAULT NULL,
 	bot					VARCHAR(30) NOT NULL,
 	service				VARCHAR(30) DEFAULT NULL,
-	status				ENUM('fixed', 'posted') DEFAULT NULL,
+	status				ENUM('fixed', 'posted', 'failed') DEFAULT NULL,
 	page_title			VARCHAR(255) DEFAULT NULL,
 	datetime			TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
