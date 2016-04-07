@@ -88,10 +88,11 @@ if ( $result->num_rows > 0 ) {
 				<th>Date</th>
 			</tr>';
 	while ( $row = $result->fetch_assoc() ) {
-		// foreach ( $row as $key => $value) {
-		// 	$row[$key] = htmlspecialchars_decode( $value );
-		// }
-		$html .= '<tr class="trow">'
+		$classes = 'trow ';
+		if ( $row['rev_id'] == 0 ) {
+			$classes .= 'terror';
+		}
+		$html .= '<tr class="' . $classes . '">'
 					.'<td><a href="https://'. $row['wiki'].'">'. $row['wiki'] .'</a></td>'
 					.'<td>'. $row['bot'] .'</td>'
 					.'<td><a href="https://'.$row['wiki'].'/wiki/'.$row['page_title'].'">'. $row['page_title'] .'</a></td>'
