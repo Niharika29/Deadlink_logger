@@ -82,7 +82,6 @@ table td {
 	border-top: 1px solid #ffffff;
 	border-bottom:1px solid #e0e0e0;
 	border-left: 1px solid #e0e0e0;
-	background: white;
 	background: -webkit-gradient(linear, left top, left bottom, from(#fbfbfb), to(#fafafa));
 	background: -moz-linear-gradient(top,  #fbfbfb,  #fafafa);
 }
@@ -119,5 +118,6 @@ table tr:hover td {
 }
 
 .terror {
-	background-color: #FACCCC;
+	background: #FACCCC;
+	border: 1px solid #FACCCC;
 }
