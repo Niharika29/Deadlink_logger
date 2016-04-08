@@ -118,5 +118,12 @@ table tr:hover td {
 }
 
 table .terror td {
+	background: #F6D8D8;
+}
+
+table .terror td:hover{
 	background: #F2C6C6;
 }
+
+
+
