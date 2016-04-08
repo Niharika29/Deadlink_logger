@@ -121,7 +121,7 @@ table .terror td {
 	background: #F6D8D8;
 }
 
-table .terror td:hover{
+table .terror:hover td{
 	background: #F2C6C6;
 }
 
