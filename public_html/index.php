@@ -5,31 +5,29 @@ require_once dirname(__FILE__) . '/../config.php';
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
 $bot = 'all';
-$lang = 'en';
-$wiki = 'wikipedia';
+$wiki = 'en.wikipedia.org';
 $time = 'lweek';
 $html = '';
-$dataf = array(); // Links fixed
-$datan = array(); // Links not fixed
-$result = array();
+$dataf = []; // Links fixed
+$datan = []; // Links not fixed
+$result = [];
 $totalf = 0;
-$botNames = array();
+$botNames = [];
+$wikiNames = [];
 
 // Default query
 $query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log ORDER BY datetime DESC LIMIT 100";
 $chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 			FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND wiki = 'en.wikipedia.org'
 			GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
-$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)";
+$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+				AND wiki = 'en.wikipedia.org'";
 
 if ( isset( $_POST['submit'] ) ) {
 	$time = $_POST['time'];
-	$lang = $_POST['lang'];
 	$wiki = $_POST['wiki'];
 	$bot = $_POST['bot'];
 
-	// Compose url from drop-downs
-	$url = mysqli_real_escape_string( $link, $lang . '.' . $wiki . '.' . 'org' );
 	if ( $time == 'lweek' ) {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 7 DAY)';
 	} else if ( $time == 'lmonth' ) {
@@ -38,27 +36,36 @@ if ( isset( $_POST['submit'] ) ) {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 	}
 	if ( $bot == 'all' ) {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."'
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $wiki ."'
 				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $url ."'
+				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $wiki ."'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff";
 	} else {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $url ."' AND datetime >= $timeDiff
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $wiki ."' AND datetime >= $timeDiff
 				AND bot = '$bot' ORDER BY datetime DESC LIMIT 100";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '". $url ."'
+				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '". $wiki ."'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot'";
 	}
 }
 // Get all the bot names
-$botQuery = "SELECT DISTINCT bot FROM bot_log ORDER BY bot DESC LIMIT 50";
+$botQuery = "SELECT DISTINCT bot FROM bot_log ORDER BY bot DESC";
 $botData = mysqli_query( $link, $botQuery );
 if ( $botData->num_rows > 0 ) {
 	while ( $row = $botData->fetch_assoc() ) {
 		$botNames[] = $row['bot'];
+	}
+}
+
+// Get all wikis
+$wikiQuery = "SELECT DISTINCT wiki FROM bot_log ORDER BY wiki ASC";
+$wikiData = mysqli_query( $link, $wikiQuery );
+if ( $wikiData->num_rows > 0 ) {
+	while ( $row = $wikiData->fetch_assoc() ) {
+		$wikiNames[] = $row['wiki'];
 	}
 }
 
@@ -132,19 +139,16 @@ if ( $result->num_rows > 0 ) {
 					<option value="lyear" <?= $time == 'lyear' ? 'selected' : '' ?> >Last year</option>
 				</select>
 
-				<select name="lang">
-					<option value="en" if( <?= $lang == 'en' ? 'selected' : '' ?> >en</option>
-					<option value="de" if( <?= $lang == 'de' ? 'selected' : '' ?> >de</option>
-					<option value="fr" if( <?= $lang == 'fr' ? 'selected' : '' ?> >fr</option>
-					<option value="hi" if( <?= $lang == 'hi' ? 'selected' : '' ?> >hi</option>
-					<option value="he" if( <?= $lang == 'he' ? 'selected' : '' ?> >he</option>
-					<option value="es" if( <?= $lang == 'es' ? 'selected' : '' ?> >es</option>
-				</select>
-
 				<select name="wiki">
-					<option value="wikipedia" if( <?= $wiki == 'wikipedia' ? 'selected' : '' ?> >wikipedia</option>
-					<option value="wikisource" if( <?= $wiki == 'wikisource' ? 'selected' : '' ?> >wikisource</option>
-					<option value="wikinews" if( <?= $wiki == 'wikinews' ? 'selected' : '' ?> >wikinews</option>
+					<?php
+						foreach ( $wikiNames as $wikiname ) {
+							echo "<option value=\"$wiki\"";
+							if ( $wikiname == $wiki ) {
+								echo ' selected';
+							}
+							echo ">$wikiname</option>";
+						}
+					?>
 				</select>
 
 				<select name="bot">
