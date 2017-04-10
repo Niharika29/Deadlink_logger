@@ -142,7 +142,7 @@ if ( $result->num_rows > 0 ) {
 				<select name="wiki">
 					<?php
 						foreach ( $wikiNames as $wikiname ) {
-							echo "<option value=\"$wiki\"";
+							echo "<option value=\"$wikiname\"";
 							if ( $wikiname == $wiki ) {
 								echo ' selected';
 							}
