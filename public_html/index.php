@@ -5,7 +5,7 @@ require_once dirname(__FILE__) . '/../config.php';
 $link = mysqli_connect( $credentials['host'], $credentials['user'], $credentials['pass'], $credentials['db'] );
 
 $bot = 'all';
-$wiki = 'en.wikipedia.org';
+$wiki = 'all';
 $time = 'lweek';
 $html = '';
 $dataf = []; // Links fixed
@@ -15,13 +15,14 @@ $totalf = 0;
 $botNames = [];
 $wikiNames = [];
 
-// Default query
-$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log ORDER BY datetime DESC LIMIT 100";
+// Default query for records on the page
+$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log ORDER BY datetime DESC LIMIT 200";
+
+// Chart data
 $chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
 			FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND wiki = 'en.wikipedia.org'
 			GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
-$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
-				AND wiki = 'en.wikipedia.org'";
+$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND wiki = 'en.wikipedia.org'";
 
 if ( isset( $_POST['submit'] ) ) {
 	$time = $_POST['time'];
@@ -35,20 +36,30 @@ if ( isset( $_POST['submit'] ) ) {
 	} else {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 1 YEAR)';
 	}
-	if ( $bot == 'all' ) {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $wiki ."'
-				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 100";
+	if ( $bot == 'all' && $wiki == 'all' ) {
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE datetime >= $timeDiff ORDER BY datetime DESC LIMIT 200";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND wiki = '". $wiki ."'
-				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+				FROM bot_log WHERE datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff";
-	} else {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '". $wiki ."' AND datetime >= $timeDiff
-				AND bot = '$bot' ORDER BY datetime DESC LIMIT 100";
+	} elseif ( $bot == 'all' ) {
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = $wiki
+				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 200";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '". $wiki ."'
+				FROM bot_log WHERE wiki = $wiki AND datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE wiki = $wiki AND datetime >= $timeDiff";
+	} elseif ( $wiki == 'all' ) {
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE bot = $bot
+				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 200";
+		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
+				FROM bot_log WHERE bot = $bot AND datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE bot = $bot AND datetime >= $timeDiff";
+	} else {
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE bot = $bot AND wiki = $wiki AND
+				datetime >= $timeDiff ORDER BY datetime DESC LIMIT 200";
+		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
+				FROM bot_log WHERE datetime >= $timeDiff AND bot = $bot AND wiki = $wiki
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
-		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot'";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff AND bot = $bot AND wiki = $wiki";
 	}
 }
 // Get all the bot names
@@ -140,6 +151,7 @@ if ( $result->num_rows > 0 ) {
 				</select>
 
 				<select name="wiki">
+					<option value="all" if( <?= $wiki == 'all' ? 'selected' : '' ?> >All projects</option>
 					<?php
 						foreach ( $wikiNames as $wikiname ) {
 							echo "<option value=\"$wikiname\"";
