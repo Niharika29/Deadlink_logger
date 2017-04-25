@@ -42,24 +42,24 @@ if ( isset( $_POST['submit'] ) ) {
 				FROM bot_log WHERE datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff";
 	} elseif ( $bot == 'all' ) {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = $wiki
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE wiki = '$wiki'
 				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 200";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE wiki = $wiki AND datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
-		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE wiki = $wiki AND datetime >= $timeDiff";
+				FROM bot_log WHERE wiki = '$wiki' AND datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE wiki = '$wiki' AND datetime >= $timeDiff";
 	} elseif ( $wiki == 'all' ) {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE bot = $bot
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE bot = '$bot'
 				AND datetime >= $timeDiff ORDER BY datetime DESC LIMIT 200";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE bot = $bot AND datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
-		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE bot = $bot AND datetime >= $timeDiff";
+				FROM bot_log WHERE bot = '$bot' AND datetime >= $timeDiff GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE bot = '$bot' AND datetime >= $timeDiff";
 	} else {
-		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE bot = $bot AND wiki = $wiki AND
+		$query = "SELECT *, CAST( datetime AS DATE ) AS day FROM bot_log WHERE bot = '$bot' AND wiki = '$wiki' AND
 				datetime >= $timeDiff ORDER BY datetime DESC LIMIT 200";
 		$chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) AS numf, SUM( links_not_fixed ) AS numn
-				FROM bot_log WHERE datetime >= $timeDiff AND bot = $bot AND wiki = $wiki
+				FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '$wiki'
 				GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
-		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff AND bot = $bot AND wiki = $wiki";
+		$pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= $timeDiff AND bot = '$bot' AND wiki = '$wiki'";
 	}
 }
 // Get all the bot names
