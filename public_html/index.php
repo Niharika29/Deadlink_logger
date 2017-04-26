@@ -164,7 +164,7 @@ if ( $result->num_rows > 0 ) {
 				</select>
 
 				<select name="wiki">
-					<option value="all" if( <?= $wiki == 'all' ? 'selected' : '' ?> >All projects</option>
+					<option value="all" <?= $wiki == 'all' ? 'selected' : '' ?> >All projects</option>
 					<?php
 						foreach ( $wikiNames as $wikiname ) {
 							echo "<option value=\"$wikiname\"";
@@ -177,7 +177,7 @@ if ( $result->num_rows > 0 ) {
 				</select>
 
 				<select name="bot">
-					<option value="all" if( <?= $bot == 'all' ? 'selected' : '' ?> >All bots</option>
+					<option value="all" <?= $bot == 'all' ? 'selected' : '' ?> >All bots</option>
 					<?php
 						foreach ( $botNames as $botName ) {
 							echo "<option value=\"$botName\"";
@@ -188,7 +188,7 @@ if ( $result->num_rows > 0 ) {
 						}
 					?>
 				</select>
-				<input type="checkbox" id="hidenull" name="hidenull" value="<?= $skipNull == 1 ? true : false ?>"/>
+				<input type="checkbox" id="hidenull" name="hidenull" <?= $skipNull ? 'checked' : '' ?>/>
 				<label for="hidenull">Skip null edits</label>
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
