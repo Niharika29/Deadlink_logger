@@ -24,10 +24,14 @@ $chart = "SELECT datetime, CAST( datetime AS DATE ) AS day, SUM( links_fixed ) A
 			GROUP BY CAST( datetime AS DATE ) ORDER BY datetime ASC";
 $pagesQuery = "SELECT DISTINCT page_title FROM bot_log WHERE datetime >= DATE_SUB(CURDATE(), INTERVAL 7 DAY) AND wiki = 'en.wikipedia.org'";
 
+$skipNull = false;
+
 if ( isset( $_POST['submit'] ) ) {
 	$time = $_POST['time'];
 	$wiki = $_POST['wiki'];
 	$bot = $_POST['bot'];
+	$skipNull = isset( $_POST['hidenull'] ) ? true : false;
+
 
 	if ( $time == 'lweek' ) {
 		$timeDiff = 'DATE_SUB(CURDATE(), INTERVAL 7 DAY)';
@@ -94,7 +98,6 @@ if ( $chartData->num_rows > 0 ) {
 }
 
 $result = mysqli_query( $link, $query );
-$skipNull = isset( $_POST['hidenull'] ) ? $_POST['hidenull'] : false;
 
 if ( $result->num_rows > 0 ) {
 	$html .= '<table id="results">';
@@ -185,7 +188,7 @@ if ( $result->num_rows > 0 ) {
 						}
 					?>
 				</select>
-				<input type="checkbox" id="hidenull" /><label for="hidenull">Skip null edits</label>
+				<input type="checkbox" id="hidenull" value="<?= $skipNull ?>"/><label for="hidenull">Skip null edits</label>
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
