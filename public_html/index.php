@@ -188,7 +188,7 @@ if ( $result->num_rows > 0 ) {
 						}
 					?>
 				</select>
-				<input type="checkbox" id="hidenull" value="<?= $skipNull ?>"/><label for="hidenull">Skip null edits</label>
+				<input type="checkbox" id="hidenull" name="hidenull" value="<?= $skipNull ?>"/><label for="hidenull">Skip null edits</label>
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
