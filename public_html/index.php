@@ -131,7 +131,7 @@ if ( $result->num_rows > 0 ) {
 	}
 	$html .= '</table>';
 } else {
-	$html .= 'No records found!';
+	$html .= '<center><h2>No records found!</h2></center>';
 }
 
 ?>
@@ -185,7 +185,7 @@ if ( $result->num_rows > 0 ) {
 						}
 					?>
 				</select>
-				<input type="checkbox" id="hidenull" value="Skip null edits" />
+				<input type="checkbox" id="hidenull" /><label for="hidenull">Skip null edits</label>
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
