@@ -101,8 +101,10 @@ table tr:hover td {
 	border: none;
 	color: white;
 	padding: 8px auto;
+	margin: 5px;
 	text-align: center;
 	text-decoration: none;
+
 }
 
 #submit:hover {
