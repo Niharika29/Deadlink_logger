@@ -67,7 +67,9 @@ $botQuery = "SELECT DISTINCT bot FROM bot_log ORDER BY bot DESC";
 $botData = mysqli_query( $link, $botQuery );
 if ( $botData->num_rows > 0 ) {
 	while ( $row = $botData->fetch_assoc() ) {
-		$botNames[] = $row['bot'];
+		if ( $row['bot'] !== "" ) {
+			$botNames[] = $row['bot'];
+		}
 	}
 }
 
@@ -90,7 +92,10 @@ if ( $chartData->num_rows > 0 ) {
 		$totalf += $row['numf'];
 	}
 }
+
 $result = mysqli_query( $link, $query );
+$skipNull = isset( $_POST['hidenull'] ) ? $_POST['hidenull'] : false;
+
 if ( $result->num_rows > 0 ) {
 	$html .= '<table id="results">';
 	$html .= '<tr>
@@ -107,6 +112,9 @@ if ( $result->num_rows > 0 ) {
 	while ( $row = $result->fetch_assoc() ) {
 		$classes = 'trow ';
 		if ( $row['rev_id'] == 0 ) {
+			if ( $skipNull ) {
+				continue;
+			}
 			$classes .= 'terror';
 		}
 		$html .= '<tr class="' . $classes . '">'
@@ -122,10 +130,12 @@ if ( $result->num_rows > 0 ) {
 				.'</tr>';
 	}
 	$html .= '</table>';
+} else {
+	$html .= 'No records found!';
 }
 
 ?>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 	<head>
 		<title>IA bot logs</title>
 <script src="js/Chart.min.js" type="text/javascript"></script>
@@ -166,7 +176,7 @@ if ( $result->num_rows > 0 ) {
 				<select name="bot">
 					<option value="all" if( <?= $bot == 'all' ? 'selected' : '' ?> >All bots</option>
 					<?php
-						foreach ( $botNames as $botName) {
+						foreach ( $botNames as $botName ) {
 							echo "<option value=\"$botName\"";
 							if ( $bot == $botName ) {
 								echo ' selected';
@@ -175,6 +185,7 @@ if ( $result->num_rows > 0 ) {
 						}
 					?>
 				</select>
+				<input type="checkbox" id="hidenull" value="Skip null edits" />
 				<input type="submit" name="submit" id="submit" value="Go" />
 			</form>
 		</div>
